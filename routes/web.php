@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', 'PostController@index')->name('home');
-
+Route::resource('posts', 'PostController');
 
 
 Route::resource('category','CategoryController');

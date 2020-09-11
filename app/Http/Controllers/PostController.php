@@ -29,7 +29,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -40,8 +40,22 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'image' => 'required',
+            'description' => 'required'
+        ]);
 
-        Post::create($request->all());
+        $post = new Post([
+            'user_id' => 1,
+            'slug' => 'test',
+            'title' => $request->get('title'),
+            'image' => $request->get('image'),
+            'short_description' => 'short description',
+            'description' => $request->get('description'),
+            'published' => 0
+        ]);
+        $post->save();
 
         return back();
     }
