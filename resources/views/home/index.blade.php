@@ -210,36 +210,6 @@
 
             </div>
         </div>
-
-
-
-
-
-
-
-
-        <div class="form-group">
-            <div class="text-center social-btn">
-                <a class="btn btn-info" href="{{ route('social.login', ['provider' => 'facebook']) }}>
-                                <i class="fa fa-facebook"></i>&nbsp; Sign in with Facebook</a>
-            </div>
-            @if ($errors->any())
-            <div class="alert alert-danger text-center">
-                @foreach ($errors->all() as $error)
-                <div>{{ $error }}</div>
-                @endforeach
-            </div>
-            @endif
-        </div>
-
-
-
-
-
-
-
-
-
         <div class="col-sm-9 padding-right">
             <div class="features_items"><!--features_items-->
                 <h2 class="title text-center">Features Items
