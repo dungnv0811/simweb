@@ -18,7 +18,7 @@ class PostController extends Controller
 //            abort(404,"Sorry, You can do this actions");
 //        }
 
-        $posts = Post::all();
+        $posts = Post::paginate(9);
         return view('home.index', compact('posts'));
     }
 

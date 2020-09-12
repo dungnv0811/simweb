@@ -241,6 +241,7 @@
                     </div>
                 </div>
                 @endforeach
+                {{ $posts->links() }}
             </div><!--features_items-->
 
             <div class="recommended_items"><!--recommended_items-->

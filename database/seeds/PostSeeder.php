@@ -11,7 +11,7 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=0; $i < 20; $i++) {
+        for ($i=0; $i < 2000; $i++) {
             DB::table('posts')->insert([
                 'user_id' => 1,
                 'slug' => 'i-want-to-sell-'.$i,
@@ -19,7 +19,7 @@ class PostSeeder extends Seeder
                 'image' => 'admin',
                 'short_description' => 'test short description',
                 'description' => 'test long description',
-                'published' => 1,
+                'status' => 'published',
             ]);
         }
     }

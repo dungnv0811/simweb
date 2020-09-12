@@ -22,7 +22,7 @@ class CreatePostsTable extends Migration
             $table->string('image');
             $table->string('short_description', 160);
             $table->longText('description');
-            $table->boolean('published')->default(0);
+            $table->string('status')->default('unpublished');
             $table->timestamps();
         });
     }

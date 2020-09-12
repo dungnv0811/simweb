@@ -18,6 +18,6 @@ class Post extends Model
         'image',
         'short_description',
         'description',
-        'published'
+        'status'
     ];
 }
