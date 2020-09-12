@@ -90,8 +90,13 @@
                                     <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
                                     <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                                     <li><a href="{{ url('/posts/create') }}"><i class="fa fa-crosshairs"></i> Đăng tin</a></li>
-                                    <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                                    @if (Auth::guest())
                                     <li><a href="{{ url('/login') }}"><i class="fa fa-lock"></i> Login</a></li>
+                                    <li><a href="{{ url('/register') }}"><i class="fa fa-lock"></i> Đăng kí</a></li>
+                                    @else
+                                    <li><a><i class="fa fa-lock"></i> {{ Auth::user()->name }}</a></li>
+                                    <li><a href="{{ url('/logout') }}"><i class="fa fa-lock"></i> Logout</a></li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>

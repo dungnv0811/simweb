@@ -60,8 +60,6 @@ class PostController extends Controller
 
         }
 
-
-
         $post = new Post([
             'user_id' => 1,
             'slug' => 'test',

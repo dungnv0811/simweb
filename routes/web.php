@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 //});
 Auth::routes();
 
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/', 'PostController@index')->name('home');
 Route::resource('posts', 'PostController');
 
