@@ -19,7 +19,8 @@ class PostController extends Controller
 //        }
 
         $posts = Post::paginate(9);
-        return view('home.index', compact('posts'));
+        $recommendedPosts = Post::where('is_recommended', '=', 1)->paginate(9);
+        return view('home.index', compact('posts', 'recommendedPosts'));
     }
 
     /**

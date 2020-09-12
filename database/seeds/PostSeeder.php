@@ -20,6 +20,7 @@ class PostSeeder extends Seeder
                 'short_description' => 'test short description',
                 'description' => 'test long description',
                 'status' => 'published',
+                'is_recommended' => rand(0, 1)
             ]);
         }
     }

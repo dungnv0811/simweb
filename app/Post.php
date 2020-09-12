@@ -18,6 +18,7 @@ class Post extends Model
         'image',
         'short_description',
         'description',
-        'status'
+        'status',
+        'is_recommended'
     ];
 }

@@ -23,6 +23,7 @@ class CreatePostsTable extends Migration
             $table->string('short_description', 160);
             $table->longText('description');
             $table->string('status')->default('unpublished');
+            $table->boolean('is_recommended')->default(0);
             $table->timestamps();
         });
     }
