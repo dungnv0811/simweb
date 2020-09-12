@@ -40,11 +40,27 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+
+        request()->validate([
+
             'title' => 'required',
-            'image' => 'required',
+            'images' => 'required',
+//            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'required'
+
         ]);
+
+
+
+        foreach ($request->file('images') as $key => $value) {
+
+            $imageName = time(). $key . '.' . $value->getClientOriginalExtension();
+
+            $value->move(public_path('images'), $imageName);
+
+        }
+
+
 
         $post = new Post([
             'user_id' => 1,
