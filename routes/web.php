@@ -22,6 +22,9 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/', 'PostController@index')->name('home');
 Route::resource('posts', 'PostController');
 
+Route::post('/comments/store', 'PostCommentController@store')->name('comments.store');
+Route::post('/reply/store', 'PostCommentController@replyStore')->name('reply.store');
+
 
 Route::resource('category','CategoryController');
 

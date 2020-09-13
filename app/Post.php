@@ -21,4 +21,9 @@ class Post extends Model
         'status',
         'is_recommended'
     ];
+
+
+    public function comments() {
+        return $this->morphMany(PostComment::class, 'commentable')->whereNull('parent_id');
+    }
 }
