@@ -11,16 +11,22 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 //        if(!Gate::allows('isAdmin')){
 //            abort(404,"Sorry, You can do this actions");
 //        }
 
-        $posts = Post::paginate(9);
-        $recommendedPosts = Post::where('is_recommended', '=', 1)->paginate(9);
+        $posts = Post::paginate(6);
+        $recommendedPosts = Post::where('is_recommended', '=', 1)->paginate(6);
+
+        if ($request->ajax()) {
+            return view('partials.ajaxPost', compact('posts', 'recommendedPosts'));
+        }
+
         return view('home.index', compact('posts', 'recommendedPosts'));
     }
 

@@ -210,74 +210,55 @@
 
             </div>
         </div>
-        <div class="col-sm-9 padding-right">
-            <div class="features_items"><!--features_items-->
-                <h2 class="title text-center">Features Items
-                @foreach ($posts as $post)
-                <div class="col-sm-4">
-                    <div class="product-image-wrapper">
-                        <div class="single-products">
-                            <div class="productinfo text-center">
-                                <img src="images/home/product2.jpg" alt="" />
-                                <h2>$56</h2>
-                                <p>{{ $post->title }}</p>
-                                <a href="{{ route('posts.show', $post->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Xem bài</a>
-                            </div>
-                            <div class="product-overlay">
-                                <div class="overlay-content">
-                                    <h2>$56</h2>
-                                    <p>{{ $post->title }}</p>
-                                    <a href="{{ route('posts.show', $post->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Show Post</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="choose">
-                            <ul class="nav nav-pills nav-justified">
-                                <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-                                <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-                {{ $posts->links() }}
-            </div><!--features_items-->
-
-            <div class="recommended_items"><!--recommended_items-->
-                <h2 class="title text-center">recommended items</h2>
-
-                <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        @foreach ($recommendedPosts->chunk(3) as $three)
-                            <div class="item @if ($loop->first) active @endif">
-                                @foreach($three as $recommendedPost)
-                                    <div class="col-sm-4">
-                                        <div class="product-image-wrapper">
-                                            <div class="single-products">
-                                                <div class="productinfo text-center">
-                                                    <img src="images/home/recommend1.jpg" alt="" />
-                                                    <h2>$56</h2>
-                                                    <p>{{ $recommendedPost->title }}</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @endforeach
-                    </div>
-                    <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
-                        <i class="fa fa-angle-left"></i>
-                    </a>
-                    <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-                </div>
-            </div><!--/recommended_items-->
-
+        <div class="col-sm-9 padding-right" id="posts-index-id">
+            @include('partials.ajaxPost')
         </div>
     </div>
 </div>
+@endsection
+
+@section('javascript')
+<script type="text/javascript">
+    $(window).on('hashchange', function() {
+        if (window.location.hash) {
+            var page = window.location.hash.replace('#', '');
+            if (page == Number.NaN || page <= 0) {
+                return false;
+            }else{
+                console.log("223333");
+                getData(page);
+            }
+        }
+    });
+
+    $(document).ready(function()
+    {
+        $(document).on('click', '.page-link',function(event)
+        {
+            event.preventDefault();
+
+            $('li').removeClass('active');
+            $(this).parent('li').addClass('active');
+
+            var page=$(this).attr('href').split('page=')[1];
+
+            getData(page);
+        });
+
+    });
+
+    function getData(page){
+        $.ajax(
+            {
+                url: '?page=' + page,
+                type: "get",
+                datatype: "html"
+            }).done(function(data){
+            $("#posts-index-id").empty().html(data);
+            location.hash = page;
+        }).fail(function(jqXHR, ajaxOptions, thrownError){
+            alert('No response from server');
+        });
+    }
+</script>
 @endsection
