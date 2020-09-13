@@ -273,7 +273,7 @@
                             </ul>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                             <p><b>Write Your Review</b></p>
-                            @include('partials.comment_replies', ['comments' => $post->comments, 'post_id' => $post->id])
+                            @include('partials.commentReply', ['comments' => $post->comments, 'post_id' => $post->id])
                             <form method="post" action="{{ route('comments.store') }}">
                                 @csrf
                                 <div class="form-group">

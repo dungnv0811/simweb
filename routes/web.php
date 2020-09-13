@@ -26,6 +26,10 @@ Route::post('/comments/store', 'PostCommentController@store')->name('comments.st
 Route::post('/reply/store', 'PostCommentController@replyStore')->name('reply.store');
 
 
+Route::get('pagination-ajax','AjaxPaginationController@ajaxPagination')->name('ajax.pagination');
+
+
+
 Route::resource('category','CategoryController');
 
 Route::get('profile', function(){
