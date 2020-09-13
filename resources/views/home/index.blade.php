@@ -223,13 +223,6 @@
                                 <p>{{ $post->title }}</p>
                                 <a href="{{ route('posts.show', $post->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Xem bài</a>
                             </div>
-                            <div class="product-overlay">
-                                <div class="overlay-content">
-                                    <h2>$56</h2>
-                                    <p>{{ $post->title }}</p>
-                                    <a href="{{ route('posts.show', $post->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Show Post</a>
-                                </div>
-                            </div>
                         </div>
                         <div class="choose">
                             <ul class="nav nav-pills nav-justified">
