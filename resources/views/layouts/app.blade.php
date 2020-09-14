@@ -88,7 +88,7 @@
                             <div class="shop-menu pull-right">
                                 <ul class="nav navbar-nav">
                                     <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
+                                    <li><a href="#"><i class="fa fa-star"></i> Quản lý</a></li>
                                     <li><a href="{{ url('/posts/create') }}"><i class="fa fa-crosshairs"></i> Đăng tin</a></li>
                                     @if (Auth::guest())
                                     <li><a href="{{ url('/login') }}"><i class="fa fa-lock"></i> Login</a></li>
