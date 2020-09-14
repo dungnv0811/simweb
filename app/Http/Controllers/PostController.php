@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -39,8 +40,9 @@ class PostController extends Controller
         if (Auth::guest()) {
             return redirect('login');
         }
+        $cities= DB::table("cities")->get();
 
-        return view('posts.create');
+        return view('posts.create', compact('cities'));
     }
 
     /**

@@ -165,6 +165,74 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
+                            <label for="city" class="col-md-4 control-label">Thành Phố</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" name="city" id="city">
+                                    <option value="">Select city</option>
+                                    @foreach ($cities as $city)
+                                    <option value="{{$city->id}}">
+                                        {{$city->body}}
+                                    </option>
+                                    @endforeach
+                                </select>
+
+                                @if ($errors->has('city'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('city') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('district') ? ' has-error' : '' }}">
+                            <label for="district" class="col-md-4 control-label">Quận / Huyện</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" name="district" id="district">
+                                </select>
+
+                                @if ($errors->has('district'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('district') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('ward') ? ' has-error' : '' }}">
+                            <label for="ward" class="col-md-4 control-label">Phường / Xã</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" name="ward" id="ward">
+                                </select>
+
+                                @if ($errors->has('ward'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('ward') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('street') ? ' has-error' : '' }}">
+                            <label for="street" class="col-md-4 control-label">Tên đường</label>
+
+                            <div class="col-md-6">
+                                <input id="street" type="text" class="form-control" name="street" value="{{ old('street') }}">
+
+                                @if ($errors->has('street'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('street') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
+
+
                         <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                             <label for="description" class="col-md-4 control-label">Mô tả</label>
 
@@ -248,5 +316,51 @@
             console.log('Browser not support');
         }
     }
+
+
+
+    $('#city').change(function(){
+        var cid = $(this).val();
+        if(cid){
+            $.ajax({
+                type:"get",
+                url:"{{url('/cities')}}/"+cid+"/districts",
+                success:function(res)
+                {
+                    if(res)
+                    {
+                        $("#district").empty();
+                        $("#ward").empty();
+                        $("#district").append('<option>Select State</option>');
+                        $.each(res,function(key,value){
+                            $("#district").append('<option value="'+key+'">'+value+'</option>');
+                        });
+                    }
+                }
+
+            });
+        }
+    });
+    $('#district').change(function(){
+        var sid = $(this).val();
+        if(sid){
+            $.ajax({
+                type:"get",
+                url:"{{url('/districts')}}/"+sid+"/wards",
+                success:function(res)
+                {
+                    if(res)
+                    {
+                        $("#ward").empty();
+                        $("#ward").append('<option>Select Ward</option>');
+                        $.each(res,function(key,value){
+                            $("#ward").append('<option value="'+key+'">'+value+'</option>');
+                        });
+                    }
+                }
+
+            });
+        }
+    });
 </script>
 @endsection
