@@ -29,6 +29,11 @@ Route::post('/reply/store', 'PostCommentController@replyStore')->name('reply.sto
 Route::get('pagination-ajax','AjaxPaginationController@ajaxPagination')->name('ajax.pagination');
 
 
+Route::get('/cites','AddressController@getCities')->name('address.getCities');
+Route::get('/cities/{post}/districts', 'AddressController@getDistricts')->name('address.getDistricts');
+Route::get('/districts/{post}/wards','AddressController@getWards')->name('address.getWards');
+
+
 
 Route::resource('category','CategoryController');
 
