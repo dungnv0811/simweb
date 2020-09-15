@@ -20,7 +20,6 @@ Auth::routes();
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/', 'PostController@index')->name('home');
-Route::resource('posts', 'PostController');
 
 Route::post('/comments/store', 'PostCommentController@store')->name('comments.store');
 Route::post('/reply/store', 'PostCommentController@replyStore')->name('reply.store');
@@ -44,3 +43,39 @@ Route::get('/login/{provider}', 'Auth\LoginController@redirectToProvider')
     ->name('social.login');
 Route::get('/login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')
     ->name('social.callback');
+
+
+/**
+ * Authentication group.
+ */
+Route::group(['middleware' => ['auth']], function () {
+
+    /**
+     * Admin group.
+     */
+    Route::group(['middleware' => ['can:isAdmin']], function () {
+
+
+        Route::group(['prefix' => 'post'], function () {
+            Route::put('review', 'PostController@review');
+        });
+
+    });
+
+    /**
+     * Admin ,Author group.
+     */
+    Route::group(['middleware' => ['can:isAdmin, isAuthor']], function () {
+        Route::resource('posts', 'PostController');
+    });
+
+    /**
+     * User group.
+     */
+    Route::group(['middleware' => ['can:isAdmin, isAuthor, isUser']], function () {
+
+    });
+});
+
+
+
