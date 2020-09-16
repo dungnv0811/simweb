@@ -262,11 +262,28 @@
 
     var _token = $('input[name="_token"]').val();
     $(document).on('click', '.delete', function(){
-        var id = $(this).attr("id");
+        var id = $(this).attr("value");
         var page = $('.page-item.active').text();
         if (confirm("Bạn có muốn xóa dữ liệu này không?")) {
             $.ajax({
                 url:"{{ route('posts.delete') }}",
+                method:"POST",
+                data:{id:id, _token:_token},
+                success:function(data)
+                {
+                    getData(page);
+                }
+            });
+        }
+    });
+
+    $(document).on('click', '.approve', function(){
+        var id = $(this).attr("value");
+        var text = $(this).text();
+        var page = $('.page-item.active').text();
+        if (confirm("Bạn có muốn "+text+" đăng này không?")) {
+            $.ajax({
+                url:"{{ route('admin.approvePost') }}",
                 method:"POST",
                 data:{id:id, _token:_token},
                 success:function(data)

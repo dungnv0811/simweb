@@ -189,14 +189,11 @@
                         <p>Web ID: 1089772</p>
                         <img src="images/product-details/rating.png" alt="" />
                         <span>
-									<span>US $59</span>
-									<label>Quantity:</label>
-									<input type="text" value="3" />
-									<button type="button" class="btn btn-fefault cart">
-										<i class="fa fa-shopping-cart"></i>
-										Add to cart
-									</button>
-								</span>
+                            <span>US $59</span>
+                            <label>Quantity:</label>
+                            <input type="text" value="3" />
+                            <button type="button" class="btn {{ ($post->status == 'published') ? 'btn-info' : 'btn-default' }} btn-xs approve" value="{{ $post->id }}" id="post-show-approve-{{ $post->id }}"><i class="fa fa-shopping-cart"></i> {{ ($post->status == 'published') ? 'duyệt bài' : 'đóng bài' }}</button>
+                        </span>
                         <p><b>Availability:</b> In Stock</p>
                         <p><b>Condition:</b> New</p>
                         <p><b>Brand:</b> E-SHOPPER</p>
@@ -290,10 +287,36 @@
                 </div>
             </div><!--/category-tab-->
 
-
-
-
         </div>
     </div>
 </div>
+{{ csrf_field() }}
 @endsection
+
+@section('javascript')
+<script type="text/javascript">
+    var _token = $('input[name="_token"]').val();
+
+    $(document).on('click', '.approve', function(){
+        var button = $(this)
+        var id = $(this).attr("value");
+        var text = $(this).text();
+        if (confirm("Bạn có muốn "+text+" đăng này không?")) {
+            $.ajax({
+                url:"{{ route('admin.approvePost') }}",
+                method:"POST",
+                data:{id:id, _token:_token},
+                success:function(data) {
+                    if ("{{ $post->status }}".localeCompare("published")) {
+                        button.html("đóng bài");
+                    } else {
+                        button.html("duyệt bài");
+                    }
+                }
+            });
+        }
+    });
+
+</script>
+@endsection
+
