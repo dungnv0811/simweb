@@ -74,7 +74,8 @@ Route::group(['middleware' => ['auth']], function () {
     /**
      * Admin ,Author group.
      */
-    Route::group(['middleware' => ['can:isAdmin, isAuthor']], function () {
+    Route::group(['middleware' => ['can:isAdmin, isAuthor, isUser']], function () {
+        Route::resource('users', 'UserController');
         Route::resource('posts', 'PostController');
     });
 

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -40,12 +42,21 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        $user = Auth::user();
+
+        $posts = Post::where('user_id', $id)->paginate(6);
+
+        if ($request->ajax()) {
+            return view('partials.ajaxUserPost', compact('user', 'posts'));
+        }
+
+        return view('users.show', compact('user', 'posts'));
     }
 
     /**

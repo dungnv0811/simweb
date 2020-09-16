@@ -17,7 +17,7 @@ class PostSeeder extends Seeder
         ];
         for ($i=0; $i < 2000; $i++) {
             DB::table('posts')->insert([
-                'user_id' => 1,
+                'user_id' => rand(1, 2),
                 'slug' => 'i-want-to-sell-'.$i,
                 'title' => 'I want to sell sim '.$i,
                 'image' => 'admin',

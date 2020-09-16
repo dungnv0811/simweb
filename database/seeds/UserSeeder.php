@@ -19,5 +19,12 @@ class UserSeeder extends Seeder
             'user_type' => 'admin',
             'password' => '12345678',
         ]);
+        DB::table('users')->insert([
+            'name' => 'dung nguyen',
+            'email' => 'dungnv.itdn@gmail.com',
+            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'user_type' => 'admin',
+            'password' => '12345678',
+        ]);
     }
 }
