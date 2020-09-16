@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
             'email' => 'dungnguyen@example.com',
             'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'user_type' => 'admin',
-            'password' => 'devekis01',
+            'password' => '12345678',
         ]);
     }
 }

@@ -11,6 +11,10 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
+        $status = [
+            'unpublished',
+            'published'
+        ];
         for ($i=0; $i < 2000; $i++) {
             DB::table('posts')->insert([
                 'user_id' => 1,
@@ -19,7 +23,7 @@ class PostSeeder extends Seeder
                 'image' => 'admin',
                 'short_description' => 'test short description',
                 'description' => 'test long description',
-                'status' => 'published',
+                'status' => $status[rand(0, 1)],
                 'is_recommended' => rand(0, 1)
             ]);
         }

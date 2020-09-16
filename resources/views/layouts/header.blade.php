@@ -61,12 +61,13 @@
                         <ul class="nav navbar-nav">
 
                             @if (Auth::guest())
+                                <li><a href="{{ url('/posts/create') }}"><i class="fa fa-crosshairs"></i> Đăng tin</a></li>
                                 <li><a href="{{ url('/login') }}"><i class="fa fa-lock"></i> Login</a></li>
                                 <li><a href="{{ url('/register') }}"><i class="fa fa-lock"></i> Đăng kí</a></li>
                             @else
                                 <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
                                 @can('isAdmin')
-                                <li><a href="#"><i class="fa fa-check-square"></i>Duyệt bài đăng</a></li>
+                                <li><a href="{{ route('admin.index') }}"><i class="fa fa-check-square"></i>Duyệt bài đăng</a></li>
                                 @endcan
                                 <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                                 <li><a href="{{ url('/posts/create') }}"><i class="fa fa-crosshairs"></i> Đăng tin</a></li>

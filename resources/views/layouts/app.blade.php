@@ -46,7 +46,7 @@
         <script src="{{ asset('js/price-range.js') }}"></script>
         <script src="{{ asset('js/jquery.prettyPhoto.js') }}"></script>
         <script src="{{ asset('js/main.js') }}"></script>
-        <script src="{{ asset('js/upload-image.js') }}"></script>
         <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+        @yield('javascript')
     </body>
 </html>

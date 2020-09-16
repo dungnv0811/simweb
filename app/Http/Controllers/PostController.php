@@ -5,22 +5,29 @@ namespace App\Http\Controllers;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 //        if(!Gate::allows('isAdmin')){
 //            abort(404,"Sorry, You can do this actions");
 //        }
 
-        $posts = Post::paginate(9);
-        $recommendedPosts = Post::where('is_recommended', '=', 1)->paginate(9);
+        $posts = Post::paginate(6);
+        $recommendedPosts = Post::where('is_recommended', '=', 1)->paginate(6);
+
+        if ($request->ajax()) {
+            return view('partials.ajaxPost', compact('posts', 'recommendedPosts'));
+        }
+
         return view('home.index', compact('posts', 'recommendedPosts'));
     }
 
@@ -33,8 +40,9 @@ class PostController extends Controller
         if (Auth::guest()) {
             return redirect('login');
         }
+        $cities= DB::table("cities")->get();
 
-        return view('posts.create');
+        return view('posts.create', compact('cities'));
     }
 
     /**
@@ -111,7 +119,6 @@ class PostController extends Controller
      */
     public function update(Request $request)
     {
-
         $post = Post::findOrFail($request->post_id);
 
         $post->update($request->all());
@@ -132,5 +139,19 @@ class PostController extends Controller
         $post->delete();
 
         return back();
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(Request $request)
+    {
+        $post = Post::findOrFail($request->id);
+        $post->delete();
+
+        return "deleted successfully";
     }
 }

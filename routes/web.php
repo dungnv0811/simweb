@@ -25,6 +25,14 @@ Route::post('/comments/store', 'PostCommentController@store')->name('comments.st
 Route::post('/reply/store', 'PostCommentController@replyStore')->name('reply.store');
 
 
+
+Route::get('/cites','AddressController@getCities')->name('address.getCities');
+Route::get('/cities/{post}/districts', 'AddressController@getDistricts')->name('address.getDistricts');
+Route::get('/districts/{post}/wards','AddressController@getWards')->name('address.getWards');
+
+
+
+
 Route::resource('category','CategoryController');
 
 Route::get('profile', function(){
@@ -55,11 +63,12 @@ Route::group(['middleware' => ['auth']], function () {
      */
     Route::group(['middleware' => ['can:isAdmin']], function () {
 
-
         Route::group(['prefix' => 'post'], function () {
             Route::put('review', 'PostController@review');
         });
-
+        Route::get('/admin/index','AdminController@index')->name('admin.index');
+        Route::post('/admin/approvePost', 'AdminController@approvePost')->name('admin.approvePost');
+        Route::post('/posts/delete', 'PostController@delete')->name('posts.delete');
     });
 
     /**

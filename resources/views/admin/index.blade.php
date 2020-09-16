@@ -210,8 +210,8 @@
 
             </div>
         </div>
-        <div class="col-sm-9 padding-right" id="posts-index-id">
-            @include('partials.ajaxPost')
+        <div class="col-sm-9" id="admin-index-id">
+            @include('partials.ajaxAdminPost')
         </div>
     </div>
 </div>
@@ -225,7 +225,6 @@
             if (page == Number.NaN || page <= 0) {
                 return false;
             }else{
-                console.log("223333");
                 getData(page);
             }
         }
@@ -254,11 +253,46 @@
                 type: "get",
                 datatype: "html"
             }).done(function(data){
-            $("#posts-index-id").empty().html(data);
+            $("#admin-index-id").empty().html(data);
             location.hash = page;
         }).fail(function(jqXHR, ajaxOptions, thrownError){
             alert('No response from server');
         });
     }
+
+    var _token = $('input[name="_token"]').val();
+    $(document).on('click', '.delete', function(){
+        var id = $(this).attr("value");
+        var page = $('.page-item.active').text();
+        if (confirm("Bạn có muốn xóa dữ liệu này không?")) {
+            $.ajax({
+                url:"{{ route('posts.delete') }}",
+                method:"POST",
+                data:{id:id, _token:_token},
+                success:function(data)
+                {
+                    getData(page);
+                }
+            });
+        }
+    });
+
+    $(document).on('click', '.approve', function(){
+        var id = $(this).attr("value");
+        var text = $(this).text();
+        var page = $('.page-item.active').text();
+        if (confirm("Bạn có muốn "+text+" đăng này không?")) {
+            $.ajax({
+                url:"{{ route('admin.approvePost') }}",
+                method:"POST",
+                data:{id:id, _token:_token},
+                success:function(data)
+                {
+                    getData(page);
+                }
+            });
+        }
+    });
+
 </script>
 @endsection

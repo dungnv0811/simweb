@@ -151,6 +151,71 @@
                     <form class="form-horizontal" method="POST" action="{{ route('posts.store') }}">
                         {{ csrf_field() }}
 
+                        <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
+                            <label for="city" class="col-md-4 control-label">Thành Phố</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" name="city" id="city">
+                                    <option value="">Select city</option>
+                                    @foreach ($cities as $city)
+                                    <option value="{{$city->id}}">
+                                        {{$city->body}}
+                                    </option>
+                                    @endforeach
+                                </select>
+
+                                @if ($errors->has('city'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('city') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('district') ? ' has-error' : '' }}">
+                            <label for="district" class="col-md-4 control-label">Quận / Huyện</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" name="district" id="district">
+                                </select>
+
+                                @if ($errors->has('district'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('district') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('ward') ? ' has-error' : '' }}">
+                            <label for="ward" class="col-md-4 control-label">Phường / Xã</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" name="ward" id="ward">
+                                </select>
+
+                                @if ($errors->has('ward'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('ward') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('street') ? ' has-error' : '' }}">
+                            <label for="street" class="col-md-4 control-label">Tên đường</label>
+
+                            <div class="col-md-6">
+                                <input id="street" type="text" class="form-control" name="street" value="{{ old('street') }}">
+
+                                @if ($errors->has('street'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('street') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                             <label for="title" class="col-md-4 control-label">Tiêu đề</label>
 
@@ -174,6 +239,33 @@
                                 @if ($errors->has('description'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('description') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
+                            <label for="status" class="col-md-4 control-label">Tình trạng</label>
+
+                            <div class="col-md-6">
+                                <label class="radio-inline"><input type="radio" name="status" value="new" checked>Còn mới</label>
+                                <label class="radio-inline"><input type="radio" name="status" value="old">Đã qua sử dụng</label>
+                                @if ($errors->has('status'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('status') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
+                            <label for="price" class="col-md-4 control-label">Giá (VNĐ)</label>
+
+                            <div class="col-md-6">
+                                <input id="price" type="text" class="form-control" name="price" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?" data-type="currency" value="{{ old('price') }}" placeholder="1,000,000">
+                                @if ($errors->has('price'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('price') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -204,4 +296,181 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('javascript')
+<script type="text/javascript">
+    $(document).ready(function() {
+        document.getElementById('posts-create-id').addEventListener('change', readImage, false);
+
+        $( ".preview-images-zone" ).sortable();
+
+        $(document).on('click', '.image-cancel', function() {
+            let no = $(this).data('no');
+            $(".preview-image.preview-show-"+no).remove();
+        });
+    });
+
+    var num = 4;
+    function readImage() {
+        if (window.File && window.FileList && window.FileReader) {
+            var files = event.target.files; //FileList object
+            var output = $(".preview-images-zone");
+
+            for (let i = 0; i < files.length; i++) {
+                var file = files[i];
+                if (!file.type.match('image')) continue;
+
+                var picReader = new FileReader();
+
+                picReader.addEventListener('load', function (event) {
+                    var picFile = event.target;
+                    var html =  '<div class="preview-image preview-show-' + num + '">' +
+                        '<div class="image-cancel" data-no="' + num + '">x</div>' +
+                        '<div class="image-zone"><img id="pro-img-' + num + '" src="' + picFile.result + '"></div>' +
+                        '</div>';
+
+                    output.append(html);
+                    num = num + 1;
+                });
+
+                picReader.readAsDataURL(file);
+            }
+        } else {
+            console.log('Browser not support');
+        }
+    }
+
+
+
+    $('#city').change(function(){
+        var cid = $(this).val();
+        if(cid){
+            $.ajax({
+                type:"get",
+                url:"{{url('/cities')}}/"+cid+"/districts",
+                success:function(res)
+                {
+                    if(res)
+                    {
+                        $("#district").empty();
+                        $("#ward").empty();
+                        $("#district").append('<option>Select State</option>');
+                        $.each(res,function(key,value){
+                            $("#district").append('<option value="'+key+'">'+value+'</option>');
+                        });
+                    }
+                }
+
+            });
+        }
+    });
+    $('#district').change(function(){
+        var sid = $(this).val();
+        if(sid){
+            $.ajax({
+                type:"get",
+                url:"{{url('/districts')}}/"+sid+"/wards",
+                success:function(res)
+                {
+                    if(res)
+                    {
+                        $("#ward").empty();
+                        $("#ward").append('<option>Select Ward</option>');
+                        $.each(res,function(key,value){
+                            $("#ward").append('<option value="'+key+'">'+value+'</option>');
+                        });
+                    }
+                }
+
+            });
+        }
+    });
+
+
+
+    $("input[data-type='currency']").on({
+        keyup: function() {
+            formatCurrency($(this));
+        },
+        blur: function() {
+            formatCurrency($(this), "blur");
+        }
+    });
+
+
+    function formatNumber(n) {
+        // format number 1000000 to 1,234,567
+        return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    }
+
+
+    function formatCurrency(input, blur) {
+        // appends $ to value, validates decimal side
+        // and puts cursor back in right position.
+
+        // get input value
+        var input_val = input.val();
+
+        // don't validate empty input
+        if (input_val === "") { return; }
+
+        // original length
+        var original_len = input_val.length;
+
+        // initial caret position
+        var caret_pos = input.prop("selectionStart");
+
+        // check for decimal
+        if (input_val.indexOf(".") >= 0) {
+
+            // get position of first decimal
+            // this prevents multiple decimals from
+            // being entered
+            var decimal_pos = input_val.indexOf(".");
+
+            // split number by decimal point
+            var left_side = input_val.substring(0, decimal_pos);
+            var right_side = input_val.substring(decimal_pos);
+
+            // add commas to left side of number
+            left_side = formatNumber(left_side);
+
+            // validate right side
+            right_side = formatNumber(right_side);
+
+            // On blur make sure 2 numbers after decimal
+            // if (blur === "blur") {
+            //     right_side += "00";
+            // }
+
+            // Limit decimal to only 2 digits
+            right_side = right_side.substring(0, 2);
+
+            // join number by .
+            input_val = left_side + "." + right_side;
+
+        } else {
+            // no decimal entered
+            // add commas to number
+            // remove all non-digits
+            input_val = formatNumber(input_val);
+            input_val = input_val;
+
+            // final formatting
+            // if (blur === "blur") {
+            //     input_val += ".00";
+            // }
+        }
+
+        // send updated string to input
+        input.val(input_val);
+
+        // put caret back in the right position
+        var updated_len = input_val.length;
+        caret_pos = updated_len - original_len + caret_pos;
+        input[0].setSelectionRange(caret_pos, caret_pos);
+    }
+
+</script>
 @endsection
