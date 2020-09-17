@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="{{ url('/') }}"><img src="images/home/logo.png" alt=""/></a>
+                        <a href="{{ url('/') }}"><img src={{url('/images/home/logo.png')}} alt=""/></a>
                     </div>
                     <div class="btn-group pull-right">
                         <div class="btn-group">

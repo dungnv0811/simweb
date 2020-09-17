@@ -27,8 +27,9 @@
         </td>
 
         <td class="text-center">
-            <a class="btn {{ ($post->status == 'published') ? 'btn-info' : 'btn-default' }} btn-xs approve" value="{{ $post->id }}" id="admin-approve-{{ $post->id }}"><span class="glyphicon glyphicon-edit"></span> {{ ($post->status == 'published') ? 'duyệt bài' : 'đóng bài' }}</a>
-            <a class="btn btn-danger btn-xs delete" value="{{ $post->id }}" id="admin-delete-{{ $post->id }}"><span class="glyphicon glyphicon-remove"></span> Xóa bài</a>
+            <a class="btn {{ ($post->status == 'published') ? 'btn-info' : 'btn-default' }} btn-xs approve" value="{{ $post->id }}" id="admin-approve-{{ $post->id }}"><span class="glyphicon glyphicon-star"></span> {{ ($post->status == 'published') ? 'duyệt bài' : 'đóng bài' }}</a>
+            <a class="btn btn-success btn-xs edit" value="{{ $post->id }}" id="admin-delete-{{ $post->id }}"><span class="glyphicon glyphicon-edit"></span> sửa bài</a>
+            <a class="btn btn-danger btn-xs delete" value="{{ $post->id }}" id="admin-delete-{{ $post->id }}"><span class="glyphicon glyphicon-remove"></span> xóa bài</a>
         </td>
 
     </tr>
