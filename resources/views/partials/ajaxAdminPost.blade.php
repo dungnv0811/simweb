@@ -1,6 +1,8 @@
-<div class="register-req text-center">
-    <p>Quản lý bài đăng</p>
-</div><!--/register-req-->
+<div class="row">
+    <div class="col-sm-12">
+        <h2 class="title text-center">Quản lý bài đăng</h2>
+    </div>
+</div>
 
 <table class="table table-striped custab">
     <thead>

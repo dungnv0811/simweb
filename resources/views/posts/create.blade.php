@@ -144,15 +144,18 @@
         </div>
 
         <div class="col-sm-9 padding-right">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2 class="title text-center">Đăng bài mới</h2>
+                </div>
+            </div>
             <div class="panel panel-default">
-                <div class="panel-heading">Đăng Bài</div>
-
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('posts.store') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
-                            <label for="city" class="col-md-4 control-label">Thành Phố</label>
+                            <label for="city" class="col-md-4 control-label">Thành Phố *</label>
 
                             <div class="col-md-6">
                                 <select class="form-control" name="city" id="city">
@@ -173,7 +176,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('district') ? ' has-error' : '' }}">
-                            <label for="district" class="col-md-4 control-label">Quận / Huyện</label>
+                            <label for="district" class="col-md-4 control-label">Quận / Huyện *</label>
 
                             <div class="col-md-6">
                                 <select class="form-control" name="district" id="district">
@@ -188,7 +191,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('ward') ? ' has-error' : '' }}">
-                            <label for="ward" class="col-md-4 control-label">Phường / Xã</label>
+                            <label for="ward" class="col-md-4 control-label">Phường / Xã *</label>
 
                             <div class="col-md-6">
                                 <select class="form-control" name="ward" id="ward">
@@ -203,7 +206,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('street') ? ' has-error' : '' }}">
-                            <label for="street" class="col-md-4 control-label">Tên đường</label>
+                            <label for="street" class="col-md-4 control-label">Tên đường *</label>
 
                             <div class="col-md-6">
                                 <input id="street" type="text" class="form-control" name="street" value="{{ old('street') }}">
@@ -217,7 +220,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Tiêu đề</label>
+                            <label for="title" class="col-md-4 control-label">Tiêu đề *</label>
 
                             <div class="col-md-6">
                                 <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus>
@@ -231,7 +234,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                            <label for="description" class="col-md-4 control-label">Mô tả</label>
+                            <label for="description" class="col-md-4 control-label">Mô tả *</label>
 
                             <div class="col-md-6">
                                 <textarea id="description" type="textarea" class="form-control" name="description" required value="{{ old('description') }}" rows = "10"></textarea>
@@ -258,8 +261,34 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('branch') ? ' has-error' : '' }}">
+                            <label for="branch" class="col-md-4 control-label">Hãng *</label>
+
+                            <div class="col-md-6">
+                                <input id="branch" type="text" class="form-control" name="branch">
+                                @if ($errors->has('branch'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('branch') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('model') ? ' has-error' : '' }}">
+                            <label for="model" class="col-md-4 control-label">Đời máy</label>
+
+                            <div class="col-md-6">
+                                <input id="model" type="text" class="form-control" name="model">
+                                @if ($errors->has('model'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('model') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
-                            <label for="price" class="col-md-4 control-label">Giá (VNĐ)</label>
+                            <label for="price" class="col-md-4 control-label">Giá (VNĐ) *</label>
 
                             <div class="col-md-6">
                                 <input id="price" type="text" class="form-control" name="price" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?" data-type="currency" value="{{ old('price') }}" placeholder="1,000,000">
@@ -272,7 +301,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="description" class="col-md-4 control-label">Đăng ảnh</label>
+                            <label for="description" class="col-md-4 control-label">Đăng ảnh *</label>
                             <div class="col-md-6">
                                 <input type="file" id="posts-create-id" name="images[]" required class="form-control" multiple/>
                             </div>
@@ -284,8 +313,8 @@
 
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="col-md-6 col-md-offset-5">
+                                <button type="submit" class="btn btn-primary btn-lg">
                                     Đăng Bài
                                 </button>
                             </div>
