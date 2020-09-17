@@ -181,7 +181,7 @@
         $.ajax(
             {
                 url: '?page=' + page,
-                type: "get",
+                type: "GET",
                 datatype: "html"
             }).done(function(data){
             $("#admin-index-id").empty().html(data);
@@ -225,5 +225,74 @@
         }
     });
 
+    $(document).on('click', '.edit', function(){
+        var id = $(this).attr("value");
+        var title = $("[name=hidden-title-"+ id +"]").val();
+        var description = $("[name=hidden-description-"+ id +"]").val();
+        var isRecommended = $("[name=hidden-isRecommended-"+ id +"]").val();
+        var state = $("[name=hidden-state-"+ id +"]").val();
+        var status = $("[name=hidden-status-"+ id +"]").val();
+        var branch = $("[name=hidden-branch-"+ id +"]").val();
+        var model = $("[name=hidden-model-"+ id +"]").val();
+        var price = $("[name=hidden-price-"+ id +"]").val();
+        if (isRecommended) {
+            $("#isRecommended").prop("checked", true);
+        } else {
+            $("#unrecommended").prop("checked", true);
+        }
+        $("#title").val(title);
+        $("#description").val(description);
+        if (state) {
+            $("#state-new").prop("checked", true);
+        } else {
+            $("#state-old").prop("checked", true);
+        }
+        $("#status").val(status);
+        $("#branch").val(branch);
+        $("#model").val(model);
+        $("#price").val(price);
+        $("[name=hidden-post-id]").val(id);
+    });
+
+    $(document).on('click', '.updateBtn', function(){
+        var page = $('.page-item.active').text();
+        var id = $("[name=hidden-post-id]").val();
+        var isRecommended = $("#isRecommended").val();
+        var title = $("#title").val();
+        var description = $("#description").val();
+        var state = $("#state").val();
+        var status = $("#status").val();
+        var branch = $("#branch").val();
+        var model = $("#model").val();
+        var price = $("#price").val();
+        var data = {
+            id: $("[name=hidden-post-id]").val(),
+            isRecommended: $("#isRecommended").val(),
+            title: $("#title").val(),
+            description: $("#description").val(),
+            state: $("#state").val(),
+            status: $("#status").val(),
+            branch: $("#branch").val(),
+            model: $("#model").val(),
+            price: $("#price").val(),
+            _token:_token
+        };
+
+        $.ajax({
+            url:"{{ route('admin.updatePost') }}",
+            method:"POST",
+            data: data,
+            success:function(data) {
+                getData(page);
+            }
+        });
+
+        $("#admin-index-edit-post-model").modal("hide");
+        // prevent submit form
+        return false;
+    })
+
 </script>
+
+<script src="{{ asset('js/currency.js') }}"></script>
 @endsection
