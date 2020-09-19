@@ -28,8 +28,6 @@
 
     <body>
         @include('layouts.header')
-        @include('layouts.header_menu')
-
         <section id="slider"><!--slider-->
             @yield('slider')
         </section><!--/slider-->

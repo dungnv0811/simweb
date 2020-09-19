@@ -21,14 +21,27 @@ class PostController extends Controller
 //            abort(404,"Sorry, You can do this actions");
 //        }
 
-        $posts = Post::paginate(6);
         $recommendedPosts = Post::where('is_recommended', '=', 1)->paginate(6);
+        $cities= DB::table("cities")->get();
 
         if ($request->ajax()) {
-            return view('partials.ajaxPost', compact('posts', 'recommendedPosts'));
-        }
+            $params = array_except($request->all(), ['page']);
+            // if there is search
+            if (!empty($params)) {
+                $title = $request->title;
+                $city = $request->city;
+                $district = $request->district;
+                $ward = $request->ward;
+                $posts = Post::where('title', 'LIKE', '%'.$title.'%')->paginate(6);
+                return view('partials.ajaxPost', compact('cities','posts', 'recommendedPosts'));
+            }
 
-        return view('home.index', compact('posts', 'recommendedPosts'));
+            // if only pagination
+            $posts = Post::paginate(6);
+            return view('partials.ajaxPost', compact('cities','posts', 'recommendedPosts'));
+        }
+        $posts = Post::paginate(6);
+        return view('home.index', compact('cities', 'posts', 'recommendedPosts'));
     }
 
     /**
