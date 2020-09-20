@@ -1,4 +1,6 @@
 ﻿.preview-images-zone {
+    /*width: 80%;*/
+
     border: 1px solid #ddd;
     min-height: 180px;
     /*display: flex; */
@@ -14,7 +16,7 @@
 }
 .preview-images-zone > .preview-image {
     height: 90px;
-    width: 85px;
+    width: 90px;
     position: relative;
     margin-right: 5px;
     float: left;

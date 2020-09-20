@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Post;
-use App\User;
+use App\Models\PostProduct;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,10 +16,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        if(!Gate::allows('isAdmin')){
-            abort(404,"Sorry, You can do this actions");
-        }
-
         $users = User::all();
         return view('user.index', compact('users'));
     }
@@ -33,9 +29,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
         User::create($request->all());
-
         return back();
     }
 
@@ -50,8 +44,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        $posts = Post::where('user_id', $id)->paginate(6);
-
+        $posts = PostProduct::where('user_id', $id)->paginate(10);
         if ($request->ajax()) {
             return view('partials.ajaxUserPost', compact('user', 'posts'));
         }
@@ -95,10 +88,6 @@ class UserController extends Controller
      */
     public function destroy(Request $request)
     {
-        if(!Gate::allows('isAdmin')){
-            abort(404,"Sorry, You can do this actions");
-        }
-
         $user = User::findOrFail($request->user_id);
         $user->delete();
 

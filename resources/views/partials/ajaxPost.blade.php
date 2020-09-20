@@ -33,7 +33,7 @@
 </div><!--/recommended_items-->
 
 <div class="features_items"><!--features_items-->
-    <h2 class="title text-center">Bài đăng mới (Tìm thấy {!! $posts->total() !!} bài)</h2>
+    <h2 class="title text-center">Bài đăng mới </h2>
         @foreach ($posts as $post)
         <div class="col-sm-4">
             <div class="product-image-wrapper">

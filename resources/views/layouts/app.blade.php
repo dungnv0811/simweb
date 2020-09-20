@@ -28,6 +28,8 @@
 
     <body>
         @include('layouts.header')
+        @include('layouts.header_menu')
+
         <section id="slider"><!--slider-->
             @yield('slider')
         </section><!--/slider-->
@@ -38,14 +40,18 @@
 
         @include('layouts.footer')
 
+        <!-- Javascript Requirements -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
-        <script src="{{ asset('js/jquery.js') }}"></script>
-        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <!-- Laravel Javascript Validation -->
+        <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
         <script src="{{ asset('js/jquery.scrollUp.min.js') }}"></script>
         <script src="{{ asset('js/price-range.js') }}"></script>
         <script src="{{ asset('js/jquery.prettyPhoto.js') }}"></script>
         <script src="{{ asset('js/main.js') }}"></script>
         <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
-        @yield('javascript')
+        @stack('javascript')
+
     </body>
 </html>
