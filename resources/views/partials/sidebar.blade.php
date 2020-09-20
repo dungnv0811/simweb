@@ -13,8 +13,8 @@
                 <select class="form-control" name="city" id="city">
                     <option value="">Thành phố</option>
                     @foreach ($cities as $city)
-                    <option value="{{$city->id}}">
-                        {{$city->body}}
+                    <option value="{{$city->code}}">
+                        {{$city->name_with_type}}
                     </option>
                     @endforeach
                 </select>

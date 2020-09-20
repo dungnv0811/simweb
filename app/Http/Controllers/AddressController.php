@@ -16,20 +16,20 @@ class AddressController extends Controller
     }
 
     //For fetching districts
-    public function getDistricts($id)
+    public function getDistricts($code)
     {
         $districts = DB::table("districts")
-            ->where("city_id",$id)
-            ->pluck("body","id");
+            ->where("parent_code",$code)
+            ->pluck("name_with_type","code");
         return response()->json($districts);
     }
 
     //For fetching wards
-    public function getWards($id)
+    public function getWards($code)
     {
         $wards= DB::table("wards")
-            ->where("district_id",$id)
-            ->pluck("body","id");
+            ->where("parent_code",$code)
+            ->pluck("name_with_type","code");
         return response()->json($wards);
     }
 }

@@ -24,7 +24,7 @@ class PostSeeder extends Seeder
                 'images' => 'admin',
                 'short_description' => 'test short description',
                 'description' => 'test long description',
-                'ward_id' => rand(1, 2),
+                'ward_code' => '20197',
                 'branch' => $branches[rand(0, 1)],
                 'model' => 'OPPO A5',
                 'state' => rand(0, 1),

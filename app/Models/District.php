@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class District extends Model
 {
-    protected $fillable = ['city_id', 'slug', 'body'];
+    protected $fillable = ['name', 'type', 'slug', 'name_with_type', 'path', 'path_with_type', 'code', 'parent_code'];
 
     public function wards()
     {

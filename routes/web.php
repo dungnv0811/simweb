@@ -27,8 +27,8 @@ Route::post('/reply/store', 'PostCommentController@replyStore')->name('reply.sto
 
 
 Route::get('/cites','AddressController@getCities')->name('address.getCities');
-Route::get('/cities/{post}/districts', 'AddressController@getDistricts')->name('address.getDistricts');
-Route::get('/districts/{post}/wards','AddressController@getWards')->name('address.getWards');
+Route::get('/cities/{code}/districts', 'AddressController@getDistricts')->name('address.getDistricts');
+Route::get('/districts/{code}/wards','AddressController@getWards')->name('address.getWards');
 
 
 

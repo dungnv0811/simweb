@@ -160,8 +160,8 @@
                                 <select class="form-control" name="city_id" id="city">
                                     <option value="">@lang('common.please_select')</option>
                                     @foreach ($data['cities'] as $city)
-                                    <option value="{{$city->id}}">
-                                        {{$city->body}}
+                                    <option value="{{$city->code}}">
+                                        {{$city->name_with_type}}
                                     </option>
                                     @endforeach
                                 </select>
