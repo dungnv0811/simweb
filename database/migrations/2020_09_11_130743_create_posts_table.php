@@ -19,11 +19,16 @@ class CreatePostsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('slug')->unique();
             $table->string('title', 100);
-            $table->string('image');
+            $table->unsignedInteger('ward_id');
+            $table->foreign('ward_id')->references('id')->on('wards')->onDelete('cascade');
+            $table->string('branch', 100);
+            $table->string('model', 100)->nullable();
+            $table->float('price');
+            $table->string('images');
             $table->string('short_description', 160);
             $table->longText('description');
-            $table->integer('state')->default(0); // is it brand new or second hand
-            $table->string('status')->default('unpublished');
+            $table->tinyInteger('state')->default(0); // is it brand new or second hand
+            $table->tinyInteger('status')->default(0);
             $table->boolean('is_recommended')->default(0);
             $table->timestamps();
         });

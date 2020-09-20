@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Post;
+use App\PostProduct;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -15,11 +15,7 @@ class AdminController extends Controller
      */
     public function index(Request $request)
     {
-//        if(!Gate::allows('isAdmin')){
-//            abort(404,"Sorry, You can do this actions");
-//        }
-
-        $posts = Post::paginate(15);
+        $posts = PostProduct::paginate(15);
 
         if ($request->ajax()) {
             return view('partials.ajaxAdminPost', compact('posts'));

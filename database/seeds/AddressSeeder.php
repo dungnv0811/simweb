@@ -21,7 +21,7 @@ class AddressSeeder extends Seeder
         ];
         foreach($cities as $key => $city) {
             DB::table('cities')->insert([
-                'slug' => str_slug($city, '-'),
+//                'slug' => str_slug($city, '-'),
                 'body' => $city
             ]);
         }
@@ -29,13 +29,13 @@ class AddressSeeder extends Seeder
         foreach($cities as $key => $city) {
             DB::table('districts')->insert([
                 'city_id' => $key + 1,
-                'slug' => str_slug($city . 'districts', '-'),
+//                'slug' => str_slug($city . 'districts', '-'),
                 'body' => $city.'districts'
             ]);
 
             DB::table('districts')->insert([
                 'city_id' => $key + 1,
-                'slug' => str_slug($city . 'districts', '-'),
+//                'slug' => str_slug($city . 'districts', '-'),
                 'body' => $city.'districts'
             ]);
         }
@@ -43,13 +43,13 @@ class AddressSeeder extends Seeder
         foreach($cities as $key => $city) {
             DB::table('wards')->insert([
                 'district_id' => $key + 1,
-                'slug' => str_slug($city . 'wards', '-'),
+//                'slug' => str_slug($city . 'wards', '-'),
                 'body' => $city.'wards'
             ]);
 
             DB::table('wards')->insert([
                 'district_id' => $key + 1,
-                'slug' => str_slug($city . 'wards', '-'),
+//                'slug' => str_slug($city . 'wards', '-'),
                 'body' => $city.'wards'
             ]);
         }

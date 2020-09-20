@@ -131,7 +131,7 @@
                 <div class="price-range"><!--price-range-->
                     <h2>Price Range</h2>
                     <div class="well text-center">
-                        <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="posts-index-sidebar" ><br />
+                        <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
                         <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
                     </div>
                 </div><!--/price-range-->
@@ -151,152 +151,112 @@
             </div>
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('posts.store') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
                             <label for="city" class="col-md-4 control-label">Thành Phố *</label>
 
                             <div class="col-md-6">
-                                <select class="form-control" name="city" id="city">
-                                    <option value="">Select city</option>
-                                    @foreach ($cities as $city)
+                                <select class="form-control" name="city_id" id="city">
+                                    <option value="">@lang('common.please_select')</option>
+                                    @foreach ($data['cities'] as $city)
                                     <option value="{{$city->id}}">
                                         {{$city->body}}
                                     </option>
                                     @endforeach
                                 </select>
-
-                                @if ($errors->has('city'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('city') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('district') ? ' has-error' : '' }}">
+                        <div class="form-group">
                             <label for="district" class="col-md-4 control-label">Quận / Huyện *</label>
 
                             <div class="col-md-6">
-                                <select class="form-control" name="district" id="district">
-                                </select>
+                                <select class="form-control" name="district_id" id="district">
+                                    <option value="">@lang('common.please_select')</option>
+                                    @foreach ($data['districts'] as $district)
+                                        <option value="{{$district->id}}">
+                                            {{$district->body}}
+                                        </option>
+                                    @endforeach
 
-                                @if ($errors->has('district'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('district') }}</strong>
-                                    </span>
-                                @endif
+                                </select>
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('ward') ? ' has-error' : '' }}">
+                        <div class="form-group">
                             <label for="ward" class="col-md-4 control-label">Phường / Xã *</label>
 
                             <div class="col-md-6">
-                                <select class="form-control" name="ward" id="ward">
-                                </select>
+                                <select class="form-control" name="ward_id" id="ward">
+                                    <option value="">@lang('common.please_select')</option>
+                                    @foreach ($data['wards'] as $ward)
+                                        <option value="{{$ward->id}}">
+                                            {{$ward->body}}
+                                        </option>
+                                    @endforeach
 
-                                @if ($errors->has('ward'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('ward') }}</strong>
-                                    </span>
-                                @endif
+                                </select>
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('street') ? ' has-error' : '' }}">
+                        <div class="form-group">
                             <label for="street" class="col-md-4 control-label">Tên đường *</label>
 
                             <div class="col-md-6">
-                                <input id="street" type="text" class="form-control" name="street" value="{{ old('street') }}">
-
-                                @if ($errors->has('street'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('street') }}</strong>
-                                    </span>
-                                @endif
+                                <input id="street" type="text" class="form-control" name="street" value="">
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
+                        <div class="form-group">
                             <label for="title" class="col-md-4 control-label">Tiêu đề *</label>
-
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus>
-
-                                @if ($errors->has('title'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('title') }}</strong>
-                                    </span>
-                                @endif
+                                <input id="title" type="text" class="form-control" name="title" value="" required autofocus>
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+                        <div class="form-group">
                             <label for="description" class="col-md-4 control-label">Mô tả *</label>
 
                             <div class="col-md-6">
                                 <textarea id="description" type="textarea" class="form-control" name="description" required value="{{ old('description') }}" rows = "10"></textarea>
-
-                                @if ($errors->has('description'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('description') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
+                        <div class="form-group">
                             <label for="status" class="col-md-4 control-label">Tình trạng</label>
 
-                            <div class="col-md-6">
-                                <label class="radio-inline"><input type="radio" name="status" value="new" checked>Còn mới</label>
-                                <label class="radio-inline"><input type="radio" name="status" value="old">Đã qua sử dụng</label>
-                                @if ($errors->has('status'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('status') }}</strong>
-                                    </span>
-                                @endif
+                            <div class="col-md-6" class="radio-inline">
+                                <div class="col-md-6">
+                                <label class="radio-inline"><input type="radio" name="status" value="{{ \App\Models\PostProduct::NEW }}" checked>Còn mới</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="radio-inline"><input type="radio" name="status" value="{{ \App\Models\PostProduct::SECONDHAND }}">Đã qua sử dụng</label>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('branch') ? ' has-error' : '' }}">
+                        <div class="form-group">
                             <label for="branch" class="col-md-4 control-label">Hãng *</label>
 
                             <div class="col-md-6">
                                 <input id="branch" type="text" class="form-control" name="branch">
-                                @if ($errors->has('branch'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('branch') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('model') ? ' has-error' : '' }}">
+                        <div class="form-group">
                             <label for="model" class="col-md-4 control-label">Đời máy</label>
 
                             <div class="col-md-6">
                                 <input id="model" type="text" class="form-control" name="model">
-                                @if ($errors->has('model'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('model') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
+                        <div class="form-group">
                             <label for="price" class="col-md-4 control-label">Giá (VNĐ) *</label>
 
                             <div class="col-md-6">
-                                <input id="price" type="text" class="form-control" name="price" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?" data-type="currency" value="{{ old('price') }}" placeholder="1,000,000">
-                                @if ($errors->has('price'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('price') }}</strong>
-                                    </span>
-                                @endif
+                                <input id="price" type="text" class="form-control" name="price" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?" data-type="currency" value="" placeholder="1,000,000">
                             </div>
                         </div>
 
@@ -310,8 +270,6 @@
                             <div class="preview-images-zone col-md-8 col-md-offset-2">
                             </div>
                         </div>
-
-
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-5">
                                 <button type="submit" class="btn btn-primary btn-lg">
@@ -327,7 +285,10 @@
 </div>
 @endsection
 
-@section('javascript')
+
+
+@push('javascript')
+    {!! JsValidator::formRequest('App\Http\Requests\PostProductRequest') !!}
 <script type="text/javascript">
     $(document).ready(function() {
         document.getElementById('posts-create-id').addEventListener('change', readImage, false);
@@ -384,7 +345,7 @@
                     {
                         $("#district").empty();
                         $("#ward").empty();
-                        $("#district").append('<option>Select State</option>');
+                        $("#district").append('<option>@lang('common.please_select')</option>');
                         $.each(res,function(key,value){
                             $("#district").append('<option value="'+key+'">'+value+'</option>');
                         });
@@ -405,7 +366,7 @@
                     if(res)
                     {
                         $("#ward").empty();
-                        $("#ward").append('<option>Select Ward</option>');
+                        $("#ward").append('<option>@lang('common.please_select')</option>');
                         $.each(res,function(key,value){
                             $("#ward").append('<option value="'+key+'">'+value+'</option>');
                         });
@@ -418,4 +379,4 @@
 
 </script>
 <script src="{{ asset('js/currency.js') }}"></script>
-@endsection
+@endpush

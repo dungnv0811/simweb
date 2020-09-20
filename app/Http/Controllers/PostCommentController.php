@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Post;
+use App\PostProduct;
 use App\PostComment;
 use Illuminate\Http\Request;
 
@@ -12,7 +12,7 @@ class PostCommentController extends Controller
         $comment = new PostComment();
         $comment->body = $request->get('comment_body');
         $comment->user()->associate($request->user());
-        $post = Post::find($request->get('post_id'));
+        $post = PostProduct::find($request->get('post_id'));
         $post->comments()->save($comment);
 
         return back();
@@ -23,7 +23,7 @@ class PostCommentController extends Controller
         $reply->body = $request->get('comment_body');
         $reply->user()->associate($request->user());
         $reply->parent_id = $request->get('comment_id');
-        $post = Post::find($request->get('post_id'));
+        $post = PostProduct::find($request->get('post_id'));
 
         $post->comments()->save($reply);
 
