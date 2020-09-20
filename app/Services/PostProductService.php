@@ -27,6 +27,7 @@ class PostProductService
         $param['price'] = floatval($param['price']);
         $param['slug'] =  $param['title'] . '-' . time();
         $param['user_id'] = Auth::id();
+        $param['short_description'] = substr($param['title'],128);
         return  $param;
     }
 
@@ -62,7 +63,6 @@ class PostProductService
         return view('home.index', compact('cities', 'posts', 'recommendedPosts'));
 
     }
-
 
 
 }
