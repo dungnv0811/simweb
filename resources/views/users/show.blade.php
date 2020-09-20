@@ -207,7 +207,7 @@
 </div>
 @endsection
 
-@section('javascript')
+@push('javascript')
 <script type="text/javascript">
     $(window).on('hashchange', function() {
         if (window.location.hash) {
@@ -268,4 +268,4 @@
     });
 
 </script>
-@endsection
+@endpush

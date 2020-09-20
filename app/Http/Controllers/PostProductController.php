@@ -34,13 +34,27 @@ class PostProductController extends Controller
      */
     public function index(Request $request)
     {
-        $posts = PostProduct::paginate(6);
         $recommendedPosts = PostProduct::where('is_recommended', '=', 1)->paginate(6);
-        if ($request->ajax()) {
-            return view('partials.ajaxPost', compact('posts', 'recommendedPosts'));
-        }
+        $cities= DB::table("cities")->get();
 
-        return view('home.index', compact('posts', 'recommendedPosts'));
+        if ($request->ajax()) {
+            $params = array_except($request->all(), ['page']);
+            // if there is search
+            if (!empty($params)) {
+                $title = $request->title;
+                $city = $request->city;
+                $district = $request->district;
+                $ward = $request->ward;
+                $posts = PostProduct::where('title', 'LIKE', '%'.$title.'%')->paginate(6);
+                return view('partials.ajaxPost', compact('cities','posts', 'recommendedPosts'));
+            }
+
+            // if only pagination
+            $posts = PostProduct::paginate(6);
+            return view('partials.ajaxPost', compact('cities','posts', 'recommendedPosts'));
+        }
+        $posts = PostProduct::paginate(6);
+        return view('home.index', compact('cities', 'posts', 'recommendedPosts'));
     }
 
     /**
@@ -73,7 +87,7 @@ class PostProductController extends Controller
      */
     public function show($id) {
         $post = PostProduct::find($id);
-        return view('posts.show', compact('post'));
+        return view('post_products.show', compact('post'));
     }
 
     /**

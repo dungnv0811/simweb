@@ -11,6 +11,7 @@ class AddressController extends Controller
     public function getCities()
     {
         $cities= DB::table("cities")->get();
+        return $cities;
         return view('posts.create', compact('cities'));
     }
 

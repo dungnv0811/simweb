@@ -293,7 +293,7 @@
 {{ csrf_field() }}
 @endsection
 
-@section('javascript')
+@push('javascript')
 <script type="text/javascript">
     var _token = $('input[name="_token"]').val();
 
@@ -318,5 +318,5 @@
     });
 
 </script>
-@endsection
+@endpush
 

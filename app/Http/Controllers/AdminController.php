@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\PostProduct;
+use App\Models\PostProduct;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller

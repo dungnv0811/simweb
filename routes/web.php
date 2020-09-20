@@ -88,6 +88,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('posts', 'PostProductController');
     });
 });
+Route::resource('posts', 'PostProductController')->only(['index', 'show']);
 
 
 
