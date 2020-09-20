@@ -7,6 +7,7 @@ use App\Libraries\Traits\Image;
 use App\Models\PostProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PostProductService
 {
@@ -32,28 +33,36 @@ class PostProductService
     public function createProduct(Request $request)
     {
         $param = $request->only($this->product->getFillable());
-
         if($request->hasFile('images')) {
-            $param['images']  = $this->upload($param['images'], config('define.image.product'));
+            $param['images']  = json_encode($this->upload($param['images'], config('define.image.product')));
         }
         $data = $this->handleParam($param);
         $this->product->create($data);
+    }
 
+    public function getProducts(Request $request)
+    {
+        if ($request->ajax()) {
+            $params = $request->except(['page']);
+            // if there is search
+            if (!empty($params)) {
+                $title = $request->title;
+                $city = $request->city;
+                $district = $request->district;
+                $ward = $request->ward;
+                $posts = PostProduct::where('title', 'LIKE', '%'.$title.'%')->paginate(6);
+                return view('partials.ajaxPost', compact('cities','posts', 'recommendedPosts'));
+            }
 
-
-
-
-//
-//        foreach ($request->file('images') as $key => $value) {
-//
-//            $imageName = time(). $key . '.' . $value->getClientOriginalExtension();
-//
-//            $value->move(public_path('images'), $imageName);
-//
-//        }
-
+            // if only pagination
+            $posts = PostProduct::paginate(6);
+            return view('partials.ajaxPost', compact('cities','posts', 'recommendedPosts'));
+        }
+//        $recommendedPosts = PostProduct::where('is_recommended', '=', 1)->paginate(6);
+        return view('home.index', compact('cities', 'posts', 'recommendedPosts'));
 
     }
+
 
 
 }

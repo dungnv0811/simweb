@@ -18,16 +18,18 @@ trait Image
 
     public function upload(array $images, string $folder)
     {
+        $names =  [];
         try {
-            foreach ($images as $image) {
+            foreach ($images as $key => $image) {
                 $ext = is_object($image) ? $image->getClientOriginalExtension() :  pathinfo($image)['basename'];
                 $filename = time() . '-' .  uniqid() .  '.' . $ext;
                 $image->move(storage_path('images' . DIRECTORY_SEPARATOR  . $folder), $filename);
+                $names[$key] = $filename;
             }
         } catch (\Exception $e) {
             info($e);
         }
-        return $filename;
+        return $names;
     }
 
 }

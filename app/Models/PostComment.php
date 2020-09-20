@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class PostComment extends Model
 {
+
+    protected $table = 'post_comments';
     /**
      * The attributes that are mass assignable.
      *

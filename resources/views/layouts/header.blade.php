@@ -61,15 +61,17 @@
                         <ul class="nav navbar-nav">
 
                             @if (Auth::guest())
-                                <li><a href="{{ url('/posts/create') }}"><i class="fa fa-crosshairs"></i> Đăng tin</a></li>
                                 <li><a href="{{ url('/login') }}"><i class="fa fa-lock"></i> Login</a></li>
                                 <li><a href="{{ url('/register') }}"><i class="fa fa-lock"></i> Đăng kí</a></li>
                             @else
                                 @can('isAdmin')
-                                <li><a href="{{ route('admin.index') }}"><i class="fa fa-check-square"></i>Quản lý</a></li>
+                                    <li><a href="{{ route('admin.index') }}"><i class="fa fa-check-square"></i>Quản
+                                            lý</a></li>
                                 @endcan
-                                <li><a href="{{ route('users.show', Auth::user()->id) }}"><i class="fa fa-user"></i> Cá nhân</a></li>
-                                <li><a href="{{ url('/posts/create') }}"><i class="fa fa-crosshairs"></i> Đăng tin</a></li>
+                                <li><a href="{{ route('users.show', Auth::user()->id) }}"><i class="fa fa-user"></i> Cá
+                                        nhân</a></li>
+                                <li><a href="{{ url('/posts/create') }}"><i class="fa fa-crosshairs"></i> Đăng tin</a>
+                                </li>
                                 <li><a><i class="fa fa-lock"></i> {{ Auth::user()->name }}</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-lock"></i> Logout</a></li>
                             @endif

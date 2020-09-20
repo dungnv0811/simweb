@@ -173,13 +173,6 @@
 
                             <div class="col-md-6">
                                 <select class="form-control" name="district_id" id="district">
-                                    <option value="">@lang('common.please_select')</option>
-                                    @foreach ($data['districts'] as $district)
-                                        <option value="{{$district->id}}">
-                                            {{$district->body}}
-                                        </option>
-                                    @endforeach
-
                                 </select>
                             </div>
                         </div>
@@ -189,17 +182,9 @@
 
                             <div class="col-md-6">
                                 <select class="form-control" name="ward_id" id="ward">
-                                    <option value="">@lang('common.please_select')</option>
-                                    @foreach ($data['wards'] as $ward)
-                                        <option value="{{$ward->id}}">
-                                            {{$ward->body}}
-                                        </option>
-                                    @endforeach
-
                                 </select>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <label for="street" class="col-md-4 control-label">Tên đường *</label>
 
@@ -227,10 +212,10 @@
                             <label for="status" class="col-md-4 control-label">Tình trạng</label>
 
                             <div class="col-md-6" class="radio-inline">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                 <label class="radio-inline"><input type="radio" name="status" value="{{ \App\Models\PostProduct::NEW }}" checked>Còn mới</label>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label class="radio-inline"><input type="radio" name="status" value="{{ \App\Models\PostProduct::SECONDHAND }}">Đã qua sử dụng</label>
                                 </div>
                             </div>

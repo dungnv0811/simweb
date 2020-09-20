@@ -76,7 +76,8 @@ class PostProductController extends Controller
     public function store(PostProductRequest $request)
     {
         $this->postProductService->createProduct($request);
-        return back();
+        $request->session()->flash('g', trans('common.create_success'));
+        return redirect()->route('posts.index');
     }
 
     /**
