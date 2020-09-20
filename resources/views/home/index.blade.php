@@ -75,6 +75,9 @@
             @include('partials.sidebar')
         </div>
         <div class="col-sm-9 padding-right" id="posts-index-id">
+            @if(session('message'))
+                @include('partials.message_notice')
+            @endif
             @include('partials.ajaxPost')
         </div>
     </div>

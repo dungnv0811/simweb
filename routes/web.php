@@ -53,10 +53,15 @@ Route::get('/login/{provider}/callback', 'Auth\LoginController@handleProviderCal
     ->name('social.callback');
 
 
+
 /**
  * Authentication group.
  */
 Route::group(['middleware' => ['auth']], function () {
+    Route::resource('users', 'UserController');
+    Route::resource('posts', 'PostProductController')->only(['create', 'store', 'delete']);
+
+
 
     /**
      * Admin group.
@@ -70,25 +75,28 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/admin/approvePost', 'AdminController@approvePost')->name('admin.approvePost');
         Route::post('/admin/updatePost', 'AdminController@updatePost')->name('admin.updatePost');
         Route::post('/posts/delete', 'PostProductController@delete')->name('posts.delete');
-        Route::resource('users', 'UserController');
 
     });
 
     /**
      * Admin ,Author group.
      */
-    Route::group(['middleware' => ['can:isAdmin, isAuthor']], function () {
+    Route::group(['middleware' => ['can:isAdmin,isAuthor']], function () {
+
 
     });
 
     /**
      * User group.
      */
-    Route::group(['middleware' => ['can:isAdmin, isAuthor, isUser']], function () {
-        Route::resource('posts', 'PostProductController');
+    Route::group(['middleware' => ['can:isAdmin,isAuthor,isUser']], function () {
+
     });
 });
+
+
 Route::resource('posts', 'PostProductController')->only(['index', 'show']);
+
 
 
 

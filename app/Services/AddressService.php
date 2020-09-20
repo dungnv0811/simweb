@@ -29,8 +29,6 @@ class AddressService
     public static function getAddressInformation()
     {
         $data['cities'] = self::getCities();
-        $data['districts'] = self::getDistricts();
-        $data['wards'] = self::getWards();
         return $data;
 
     }
