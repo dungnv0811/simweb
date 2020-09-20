@@ -88,7 +88,7 @@
             var page = window.location.hash.replace('#', '');
             if (page == Number.NaN || page <= 0) {
                 return false;
-            }else{
+            } else{
                 getData(page);
             }
         }

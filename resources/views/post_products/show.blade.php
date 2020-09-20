@@ -192,7 +192,9 @@
                             <span>US $59</span>
                             <label>Quantity:</label>
                             <input type="text" value="3" />
+                            @can('isAdmin')
                             <button type="button" class="btn {{ ($post->status == 'published') ? 'btn-info' : 'btn-default' }} btn-xs approve" value="{{ $post->id }}" id="post-show-approve-{{ $post->id }}"><i class="fa fa-shopping-cart"></i> {{ ($post->status == 'published') ? 'duyệt bài' : 'đóng bài' }}</button>
+                            @endcan
                         </span>
                         <p><b>Availability:</b> In Stock</p>
                         <p><b>Condition:</b> New</p>

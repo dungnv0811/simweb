@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\PostProduct;
-use App\PostComment;
+use App\Models\PostComment;
+use App\Models\PostProduct;
 use Illuminate\Http\Request;
 
 class PostCommentController extends Controller
