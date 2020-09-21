@@ -26,7 +26,7 @@ class PostProductRequest extends FormRequest
         return [
             'city_id' => ['required'],
             'district_id' => ['required'],
-            'ward_id' => ['required'],
+            'ward_code' => ['required'],
             'street' => ['required'],
             'title' => ['required'],
             'description' => ['required'],
@@ -42,7 +42,7 @@ class PostProductRequest extends FormRequest
        return [
            'city_id' => 'thành phố',
            'district_id' => 'quận',
-           'ward_id' => 'phường / xã',
+           'ward_code' => 'phường / xã',
            'street' => 'tên đường',
            'title' => 'tiêu đề',
            'description' => 'mô tả',

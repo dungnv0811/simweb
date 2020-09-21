@@ -181,7 +181,7 @@
                             <label for="ward" class="col-md-4 control-label">Phường / Xã *</label>
 
                             <div class="col-md-6">
-                                <select class="form-control" name="ward_id" id="ward">
+                                <select class="form-control" name="ward_code" id="ward">
                                 </select>
                             </div>
                         </div>

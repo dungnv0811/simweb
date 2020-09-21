@@ -9,10 +9,11 @@
 
             </div>
             <h2>Tìm kiếm nâng cao</h2>
+
             <div class="form-group">
                 <select class="form-control" name="city" id="city">
                     <option value="">Thành phố</option>
-                    @foreach ($cities as $city)
+                @foreach ($cities as $city)
                     <option value="{{$city->code}}">
                         {{$city->name_with_type}}
                     </option>

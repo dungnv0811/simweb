@@ -41,6 +41,13 @@ class PostProductService
         $this->product->create($data);
     }
 
+
+    public function getProductDetail($id)
+    {
+        return $this->product->findOrFail($id);
+
+    }
+
     public function getProducts(Request $request)
     {
         if ($request->ajax()) {

@@ -76,7 +76,7 @@ class PostProductController extends Controller
     public function store(PostProductRequest $request)
     {
         $this->postProductService->createProduct($request);
-        $request->session()->flash('g', trans('common.create_success'));
+        $request->session()->flash('message', trans('common.create_success'));
         return redirect()->route('posts.index');
     }
 
@@ -87,7 +87,7 @@ class PostProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        $post = PostProduct::find($id);
+        $post = $this->postProductService->getProductDetail($id);
         return view('post_products.show', compact('post'));
     }
 
