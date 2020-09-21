@@ -158,7 +158,7 @@
 
                             <div class="col-md-6">
                                 <select class="form-control" name="city_id" id="city">
-                                    <option value="">@lang('common.please_select')</option>
+                                    <option value="">Thành phố</option>
                                     @foreach ($data['cities'] as $city)
                                     <option value="{{$city->code}}">
                                         {{$city->name_with_type}}

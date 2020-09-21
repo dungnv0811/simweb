@@ -20,6 +20,38 @@ class CitySeeder extends Seeder
                     'name_with_type' => 'Thành phố Cần Thơ',
                     'code' => '92',
                 ),
+            48 =>
+                array (
+                    'name' => 'Đà Nẵng',
+                    'slug' => 'da-nang',
+                    'type' => 'thanh-pho',
+                    'name_with_type' => 'Thành phố Đà Nẵng',
+                    'code' => '48',
+                ),
+            31 =>
+                array (
+                    'name' => 'Hải Phòng',
+                    'slug' => 'hai-phong',
+                    'type' => 'thanh-pho',
+                    'name_with_type' => 'Thành phố Hải Phòng',
+                    'code' => '31',
+                ),
+            '01' =>
+                array (
+                    'name' => 'Hà Nội',
+                    'slug' => 'ha-noi',
+                    'type' => 'thanh-pho',
+                    'name_with_type' => 'Thành phố Hà Nội',
+                    'code' => '01',
+                ),
+            79 =>
+                array (
+                    'name' => 'Hồ Chí Minh',
+                    'slug' => 'ho-chi-minh',
+                    'type' => 'thanh-pho',
+                    'name_with_type' => 'Thành phố Hồ Chí Minh',
+                    'code' => '79',
+                ),
             95 =>
                 array (
                     'name' => 'Bạc Liêu',
@@ -99,14 +131,6 @@ class CitySeeder extends Seeder
                     'type' => 'tinh',
                     'name_with_type' => 'Tỉnh Đắk Lắk',
                     'code' => '66',
-                ),
-            48 =>
-                array (
-                    'name' => 'Đà Nẵng',
-                    'slug' => 'da-nang',
-                    'type' => 'thanh-pho',
-                    'name_with_type' => 'Thành phố Đà Nẵng',
-                    'code' => '48',
                 ),
             67 =>
                 array (
@@ -188,14 +212,6 @@ class CitySeeder extends Seeder
                     'name_with_type' => 'Tỉnh Hậu Giang',
                     'code' => '93',
                 ),
-            '01' =>
-                array (
-                    'name' => 'Hà Nội',
-                    'slug' => 'ha-noi',
-                    'type' => 'thanh-pho',
-                    'name_with_type' => 'Thành phố Hà Nội',
-                    'code' => '01',
-                ),
             17 =>
                 array (
                     'name' => 'Hoà Bình',
@@ -276,14 +292,6 @@ class CitySeeder extends Seeder
                     'name_with_type' => 'Tỉnh Long An',
                     'code' => '80',
                 ),
-            31 =>
-                array (
-                    'name' => 'Hải Phòng',
-                    'slug' => 'hai-phong',
-                    'type' => 'thanh-pho',
-                    'name_with_type' => 'Thành phố Hải Phòng',
-                    'code' => '31',
-                ),
             36 =>
                 array (
                     'name' => 'Nam Định',
@@ -363,14 +371,6 @@ class CitySeeder extends Seeder
                     'type' => 'tinh',
                     'name_with_type' => 'Tỉnh Quảng Ninh',
                     'code' => '22',
-                ),
-            79 =>
-                array (
-                    'name' => 'Hồ Chí Minh',
-                    'slug' => 'ho-chi-minh',
-                    'type' => 'thanh-pho',
-                    'name_with_type' => 'Thành phố Hồ Chí Minh',
-                    'code' => '79',
                 ),
             45 =>
                 array (
