@@ -18,8 +18,13 @@ use Illuminate\Support\Facades\Route;
 //});
 Auth::routes();
 
+Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
+Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
+Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+
+
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-Route::get('/', 'PostProductController@index')->name('home');
+Route::get('/', 'PostProductController@index')->name('home.index')->middleware('verified');
 
 Route::post('/comments/store', 'PostCommentController@store')->name('comments.store');
 Route::post('/reply/store', 'PostCommentController@replyStore')->name('reply.store');
@@ -95,7 +100,7 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 
-Route::resource('posts', 'PostProductController')->only(['index', 'show']);
+Route::resource('posts', 'PostProductController')->only(['index', 'show'])->middleware('verified');
 
 
 
