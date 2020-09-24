@@ -38,7 +38,7 @@
                         <ul class="nav navbar-nav">
 
                             @if (Auth::guest())
-                                <li><a href="{{ url('/login') }}"><i class="fa fa-lock"></i> Login</a></li>
+                                <li><a href="{{ url('/login') }}"><i class="fa fa-lock"></i> Đăng nhập</a></li>
                                 <li><a href="{{ url('/register') }}"><i class="fa fa-lock"></i> Đăng kí</a></li>
                             @else
                                 @can('isAdmin')
@@ -50,7 +50,7 @@
                                 <li><a href="{{ url('/posts/create') }}"><i class="fa fa-crosshairs"></i> Đăng tin</a>
                                 </li>
                                 <li><a><i class="fa fa-lock"></i> {{ Auth::user()->name }}</a></li>
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-lock"></i> Logout</a></li>
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-lock"></i> Đăng xuất</a></li>
                             @endif
                         </ul>
                     </div>
