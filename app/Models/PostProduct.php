@@ -40,7 +40,7 @@ class PostProduct extends Model
     {
         $result = [];
         foreach (json_decode($this->images) as $key => $image) {
-            $result[$key] = asset('storage/app/public/images' . DIRECTORY_SEPARATOR .  config('define.image.product') . DIRECTORY_SEPARATOR . $image);
+            $result[$key] = asset('/uploads/images' . DIRECTORY_SEPARATOR .  config('define.image.product') . DIRECTORY_SEPARATOR . $image);
         }
         return $result;
     }

@@ -23,7 +23,7 @@ trait Image
             foreach ($images as $key => $image) {
                 $ext = is_object($image) ? $image->getClientOriginalExtension() :  pathinfo($image)['basename'];
                 $filename = time() . '-' .  uniqid() .  '.' . $ext;
-                $image->move(storage_path('app/public/images' . DIRECTORY_SEPARATOR  . $folder), $filename);
+                $image->move(public_path('uploads/images' . DIRECTORY_SEPARATOR  . $folder), $filename);
                 $names[$key] = $filename;
             }
         } catch (\Exception $e) {
