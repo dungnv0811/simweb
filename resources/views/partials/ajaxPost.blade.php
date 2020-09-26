@@ -42,7 +42,7 @@
                         <img src="images/home/product2.jpg" alt="" />
                         <h2>$56</h2>
                         <p>{{ $post->title }}</p>
-                        <a href="{{ route('posts.show', $post->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Xem bài</a>
+                        <a href="{{ route('posts.show', $post->slug) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Xem bài</a>
                     </div>
                 </div>
                 <div class="choose">

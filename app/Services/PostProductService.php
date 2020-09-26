@@ -44,7 +44,7 @@ class PostProductService
 
     public function getProductDetail($id)
     {
-        return $this->product->findOrFail($id);
+        return $this->product->where('slug', $id)->firstorfail();
 
     }
 

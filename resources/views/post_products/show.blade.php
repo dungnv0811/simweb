@@ -11,8 +11,13 @@
             <div class="product-details"><!--product-details-->
                 <div class="col-sm-5">
                     <div class="view-product">
+                        @if(empty(json_decode($post->images, true)))
+                        <img src="{{url('/uploads/images/product/default.jpg')}}" alt="" />
+                        @else
                         <img src="{{url('/uploads/images/product/'.json_decode($post->images, true)[0])}}" alt="" />
+                        @endif
                     </div>
+                    @if(!empty(json_decode($post->images, true)))
                     <div id="similar-product" class="carousel slide" data-ride="carousel">
 
                         <!-- Wrapper for slides -->
@@ -34,6 +39,7 @@
                             <i class="fa fa-angle-right"></i>
                         </a>
                     </div>
+                    @endif
 
                 </div>
                 <div class="col-sm-7">
