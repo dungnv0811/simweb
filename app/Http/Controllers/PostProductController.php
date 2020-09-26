@@ -42,10 +42,19 @@ class PostProductController extends Controller
             // if there is search
             if (!empty($params)) {
                 $title = $request->title;
-                $city = $request->city;
-                $district = $request->district;
                 $ward = $request->ward;
-                $posts = PostProduct::where('title', 'LIKE', '%'.$title.'%')->paginate(6);
+                $price = $request->price;
+
+                if ($title != null) {
+                    // TODO add title condition
+                }
+                if ($ward != null) {
+                    // TODO add ward condition
+                }
+                if ($price != null) {
+                    // TODO whereBetween('price', [$min_price, $max_price])
+                }
+                $posts = PostProduct::where('ward_code', $ward)->where('title', 'LIKE', '%'.$title.'%')->paginate(6);
                 return view('partials.ajaxPost', compact('cities','posts', 'recommendedPosts'));
             }
 
