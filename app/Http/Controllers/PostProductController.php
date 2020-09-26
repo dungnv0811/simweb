@@ -51,8 +51,14 @@ class PostProductController extends Controller
                 if ($ward != null) {
                     // TODO add ward condition
                 }
-                if ($price != null) {
+                if ($price != 20) {
+                    // if $price = 20 then dont search to save resource
                     // TODO whereBetween('price', [$min_price, $max_price])
+                    $splitPrice = explode(',', $price, 2);
+                    $minPrice = $splitPrice[0];
+                    $maxPrice = $splitPrice[1];
+                } else {
+                    dd("khong can");
                 }
                 $posts = PostProduct::where('ward_code', $ward)->where('title', 'LIKE', '%'.$title.'%')->paginate(6);
                 return view('partials.ajaxPost', compact('cities','posts', 'recommendedPosts'));
