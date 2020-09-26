@@ -21,7 +21,7 @@
                         <div class="profile-img">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
                             <div class="file btn btn-lg btn-primary">
-                                Change Photo
+                                Đổi avatar
                                 <input type="file" name="file"/>
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="cập nhật"/>
                     </div>
                 </div>
                 <div class="row">
