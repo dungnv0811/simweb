@@ -45,7 +45,7 @@
                                     <li><a href="{{ route('admin.index') }}"><i class="fa fa-check-square"></i>Quản
                                             lý</a></li>
                                 @endcan
-                                <li><a href="{{ route('users.show', Auth::user()->id) }}"><i class="fa fa-user"></i> Cá
+                                <li><a href="{{ route('users.show', Auth::user()->email) }}"><i class="fa fa-user"></i> Cá
                                         nhân</a></li>
                                 <li><a href="{{ url('/posts/create') }}"><i class="fa fa-crosshairs"></i> Đăng tin</a>
                                 </li>
