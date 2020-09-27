@@ -2,14 +2,24 @@
 
  $('#posts-index-sidebar').slider();
 
-	var RGBChange = function() {
-	  $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')')
-	};
+var RGBChange = function() {
+  $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')')
+};
+
+// place footer at bottom only if page is short
+var shortContent = function() {
+    if($(window).height() > $('body').height()) {
+        $('#footer').addClass('navbar-fixed-bottom');
+    }
+
+};
 
 /*scroll to top*/
 
 $(document).ready(function(){
 	$(function () {
+        shortContent();
+
 		$.scrollUp({
 	        scrollName: 'scrollUp', // Element ID
 	        scrollDistance: 300, // Distance from top/bottom before showing element (px)

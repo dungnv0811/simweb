@@ -34,7 +34,7 @@
             @yield('content')
         </section>
 
-        @include('layouts.fixedFooter')
+        @include('layouts.footer')
 
 
         <script src="{{ asset('js/jquery.js') }}"></script>
