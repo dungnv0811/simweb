@@ -37,14 +37,13 @@ class UserController extends Controller
      * Display the specified resource.
      *
      * @param Request $request
-     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show(Request $request)
     {
         $user = Auth::user();
 
-        $posts = PostProduct::where('user_id', $id)->paginate(10);
+        $posts = PostProduct::where('user_id', $user->id)->paginate(10);
         if ($request->ajax()) {
             return view('partials.ajaxUserPost', compact('user', 'posts'));
         }
