@@ -93,4 +93,12 @@ class UserController extends Controller
 
         return back();
     }
+
+
+    function updateUser(Request $request) {
+        if ($request->ajax()) {
+            return $request;
+            // TODO update data of user
+        }
+    }
 }

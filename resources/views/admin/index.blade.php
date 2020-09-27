@@ -120,15 +120,6 @@
 
     $(document).on('click', '.updateBtn', function(){
         var page = $('.page-item.active').text();
-        var id = $("[name=hidden-post-id]").val();
-        var isRecommended = $("#isRecommended").val();
-        var title = $("#title").val();
-        var description = $("#description").val();
-        var state = $("#state").val();
-        var status = $("#status").val();
-        var branch = $("#branch").val();
-        var model = $("#model").val();
-        var price = $("#price").val();
         var data = {
             id: $("[name=hidden-post-id]").val(),
             isRecommended: $("#isRecommended").val(),

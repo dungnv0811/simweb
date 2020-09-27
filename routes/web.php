@@ -90,7 +90,7 @@ Route::group(['middleware' => ['auth']], function () {
      * User group.
      */
     Route::group(['middleware' => ['can:isAdmin,isAuthor,isUser']], function () {
-
+        Route::post('/user/updateUser', 'UserController@updateUser')->name('user.updateUser');
     });
 });
 
