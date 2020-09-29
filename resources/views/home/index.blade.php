@@ -128,7 +128,7 @@
                     {
                         $("#district").empty();
                         $("#ward").empty();
-                        $("#district").append('<option>Quận / huyện</option>');
+                        $("#district").append('<option value="">Quận / huyện</option>');
                         $.each(res,function(key,value){
                             $("#district").append('<option value="'+key+'">'+value+'</option>');
                         });
@@ -148,7 +148,7 @@
                 {
                     if(res) {
                         $("#ward").empty();
-                        $("#ward").append('<option>Phường / xã</option>');
+                        $("#ward").append('<option value="">Phường / xã</option>');
                         $.each(res,function(key,value){
                             $("#ward").append('<option value="'+key+'">'+value+'</option>');
                         });

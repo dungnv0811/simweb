@@ -32,8 +32,18 @@ class PostProduct extends Model
     const NEW = 0;
     const SECONDHAND = 1;
 
+    const IS_RECOMMEND = 1;
+
     public function comments() {
         return $this->morphMany(PostComment::class, 'commentable')->whereNull('parent_id');
+    }
+
+
+    public function scopeAddress($query)
+    {
+        return $query->join('wards', 'wards.id', '=', 'posts.ward_code')
+            ->join('districts', 'districts.code', '=', 'wards.parent_code')
+            ->join('cities', 'cities.code', '=', 'districts.parent_code');
     }
 
     public function getImageAttribute()

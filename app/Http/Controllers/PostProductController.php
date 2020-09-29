@@ -22,7 +22,7 @@ class PostProductController extends Controller
 
     public function __construct(PostProductService $postProductService)
     {
-        $this->postProductService  = $postProductService;
+        $this->postProductService = $postProductService;
     }
 
 
@@ -34,39 +34,12 @@ class PostProductController extends Controller
      */
     public function index(Request $request)
     {
-        $recommendedPosts = PostProduct::where('is_recommended', '=', 1)->paginate(6);
-        $cities= DB::table("cities")->get();
-
+        $recommendedPosts = $this->postProductService->getProductSuggestion();
+        $cities = DB::table("cities")->get();
+        $posts = $this->postProductService->getProducts($request);
         if ($request->ajax()) {
-            $params = array_except($request->all(), ['page']);
-            // if there is search
-            if (!empty($params)) {
-                $title = $request->title;
-                $ward = $request->ward;
-                $price = $request->price;
-
-                if ($title != null) {
-                    // TODO add title condition
-                }
-                if ($ward != null) {
-                    // TODO add ward condition
-                }
-                if ($price != 20) {
-                    // if $price = 20 then dont search to save resource
-                    // TODO whereBetween('price', [$min_price, $max_price])
-                    $splitPrice = explode(',', $price, 2);
-                    $minPrice = $splitPrice[0];
-                    $maxPrice = $splitPrice[1];
-                }
-                $posts = PostProduct::where('ward_code', $ward)->where('title', 'LIKE', '%'.$title.'%')->paginate(6);
-                return view('partials.ajaxPost', compact('cities','posts', 'recommendedPosts'));
-            }
-
-            // if only pagination
-            $posts = PostProduct::paginate(6);
-            return view('partials.ajaxPost', compact('cities','posts', 'recommendedPosts'));
+            return view('partials.ajaxPost', compact('cities', 'posts', 'recommendedPosts'));
         }
-        $posts = PostProduct::paginate(6);
         return view('home.index', compact('cities', 'posts', 'recommendedPosts'));
     }
 
@@ -75,7 +48,8 @@ class PostProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
         $data = AddressService::getAddressInformation();
         return view('post_products.create', compact('data'));
     }
@@ -83,7 +57,7 @@ class PostProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(PostProductRequest $request)
@@ -96,10 +70,11 @@ class PostProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) {
+    public function show($id)
+    {
         $post = $this->postProductService->getProductDetail($id);
         return view('post_products.show', compact('post'));
     }
@@ -107,7 +82,7 @@ class PostProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -118,8 +93,8 @@ class PostProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
@@ -134,7 +109,7 @@ class PostProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request)
@@ -149,7 +124,7 @@ class PostProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function delete(Request $request)
