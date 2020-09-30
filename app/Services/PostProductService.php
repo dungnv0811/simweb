@@ -43,9 +43,20 @@ class PostProductService
     }
 
 
-    public function getProductDetail($id)
+    public function getProductDetail($slug)
     {
-        return $this->product->where('slug', $id)->firstorfail();
+
+        $columns = [
+            'posts.*',
+            'wards.path_with_type'
+        ];
+        $condition = [
+            'posts.slug' => $slug
+        ];
+        return $this->product
+            ->ward()
+            ->where($condition)
+            ->firstOrFail($columns);
 
     }
 

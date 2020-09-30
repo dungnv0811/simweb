@@ -41,9 +41,15 @@ class PostProduct extends Model
 
     public function scopeAddress($query)
     {
-        return $query->join('wards', 'wards.id', '=', 'posts.ward_code')
+        return $query->join('wards', 'wards.code', '=', 'posts.ward_code')
             ->join('districts', 'districts.code', '=', 'wards.parent_code')
             ->join('cities', 'cities.code', '=', 'districts.parent_code');
+    }
+
+
+    public function scopeWard($query)
+    {
+        return $query->join('wards', 'wards.code', '=', 'posts.ward_code');
     }
 
     public function getImageAttribute()

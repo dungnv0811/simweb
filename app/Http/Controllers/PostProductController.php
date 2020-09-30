@@ -73,9 +73,9 @@ class PostProductController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $post = $this->postProductService->getProductDetail($id);
+        $post = $this->postProductService->getProductDetail($slug);
         return view('post_products.show', compact('post'));
     }
 
