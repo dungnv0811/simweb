@@ -44,21 +44,17 @@
                 </div>
                 <div class="col-sm-7">
                     <div class="product-information"><!--/product-information-->
-                        <img src="images/product-details/new.jpg" class="newarrival" alt="" />
                         <h2>{{ $post->title }}</h2>
-                        <p>Web ID: 1089772</p>
-                        <img src="images/product-details/rating.png" alt="" />
+                        <p>Thông tin: {{ $post->short_description }}</p>
                         <span>
-                            <span>US $59</span>
-                            <label>Quantity:</label>
-                            <input type="text" value="3" />
+                            <span>{{ $post->price }}K VNĐ</span>
                             @can('isAdmin')
-                            <button type="button" class="btn {{ ($post->status == 'published') ? 'btn-info' : 'btn-default' }} btn-xs approve" value="{{ $post->id }}" id="post-show-approve-{{ $post->id }}"><i class="fa fa-shopping-cart"></i> {{ ($post->status == 'published') ? 'duyệt bài' : 'đóng bài' }}</button>
+                            <button type="button" class="btn {{ ($post->status == 'published') ? 'btn-info' : 'btn-danger' }} btn-xs approve" value="{{ $post->id }}" id="post-show-approve-{{ $post->id }}"><i class="fa fa-lock"></i> {{ ($post->status == 'published') ? 'duyệt bài' : 'đóng bài' }}</button>
                             @endcan
                         </span>
-                        <p><b>Availability:</b> In Stock</p>
-                        <p><b>Condition:</b> New</p>
-                        <p><b>Brand:</b> E-SHOPPER</p>
+                        <p><b>Hãng:</b> {{ $post->branch }}</p>
+                        <p><b>Đời máy:</b> {{ $post->model }}</p>
+                        <p><b>Tình trạng:</b> {{ $post->status }}</p>
                         <a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
                     </div><!--/product-information-->
                 </div>
@@ -67,60 +63,22 @@
             <div class="category-tab shop-details-tab"><!--category-tab-->
                 <div class="col-sm-12">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#details" data-toggle="tab">Details</a></li>
-                        <li><a href="#reviews" data-toggle="tab">Reviews (5)</a></li>
+                        <li class="active"><a href="#details" data-toggle="tab">Thông tin chi tiết</a></li>
+                        <li><a href="#reviews" data-toggle="tab">Bình luận</a></li>
                     </ul>
                 </div>
                 <div class="tab-content">
-                    <div class="tab-pane fade active in" id="details" >
-                        <div class="col-sm-3">
-                            <div class="product-image-wrapper">
-                                <div class="single-products">
-                                    <div class="productinfo text-center">
-                                        <img src="images/home/gallery1.jpg" alt="" />
-                                        <h2>$56</h2>
-                                        <p>Easy Polo Black Edition</p>
-                                        <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="product-image-wrapper">
-                                <div class="single-products">
-                                    <div class="productinfo text-center">
-                                        <img src="images/home/gallery2.jpg" alt="" />
-                                        <h2>$56</h2>
-                                        <p>Easy Polo Black Edition</p>
-                                        <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="product-image-wrapper">
-                                <div class="single-products">
-                                    <div class="productinfo text-center">
-                                        <img src="images/home/gallery3.jpg" alt="" />
-                                        <h2>$56</h2>
-                                        <p>Easy Polo Black Edition</p>
-                                        <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="product-image-wrapper">
-                                <div class="single-products">
-                                    <div class="productinfo text-center">
-                                        <img src="images/home/gallery4.jpg" alt="" />
-                                        <h2>$56</h2>
-                                        <p>Easy Polo Black Edition</p>
-                                        <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="tab-pane fade active in" id="details">
+                        <p style="padding:15px;">
+                            {{ $post->description }}
+                        </p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Người bán:</li>
+                            <li class="list-group-item">Liên lạc:</li>
+                            <li class="list-group-item">Địa chỉ: {{ $post->path_with_type }}</li>
+                            <li class="list-group-item">Fourth item</li>
+                        </ul>
+                        Bài đăng được tạo ngày: {{ $post->created_at }}
                     </div>
 
                     <div class="tab-pane fade" id="reviews" >
@@ -143,7 +101,7 @@
                                     <input type="hidden" name="post_id" value="{{ $post->id }}" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" class="btn btn-warning" value="Add Comment" />
+                                    <input type="submit" class="btn btn-warning" value="Thêm bình luận" />
                                 </div>
                             </form>
                         </div>

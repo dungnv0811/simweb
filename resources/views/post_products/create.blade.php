@@ -80,7 +80,7 @@
                                 <label class="radio-inline"><input type="radio" name="status" value="{{ \App\Models\PostProduct::NEW }}" checked>Còn mới</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="radio-inline"><input type="radio" name="status" value="{{ \App\Models\PostProduct::SECONDHAND }}">Đã qua sử dụng</label>
+                                    <label class="radio-inline"><input type="radio" name="status" value="{{ \App\Models\PostProduct::SECONDHAND }}">Đã sử dụng</label>
                                 </div>
                             </div>
                         </div>
