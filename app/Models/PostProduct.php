@@ -24,6 +24,7 @@ class PostProduct extends Model
         'images',
         'short_description',
         'description',
+        'state',
         'status',
         'is_recommended'
     ];
@@ -66,7 +67,7 @@ class PostProduct extends Model
      */
     public function getStateLabelAttribute()
     {
-        return trans("post.status.$this->status");
+        return trans("post.status.$this->state");
     }
 
 }
