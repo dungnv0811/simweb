@@ -60,4 +60,13 @@ class PostProduct extends Model
         }
         return $result;
     }
+
+    /**
+     * @return array|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Translation\Translator|string|null
+     */
+    public function getStateLabelAttribute()
+    {
+        return trans("post.status.$this->status");
+    }
+
 }
