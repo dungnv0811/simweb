@@ -49,7 +49,7 @@
                         <span>
                             <span>{{ $post->price }}K VNĐ</span>
                             @can('isAdmin')
-                            <button type="button" class="btn {{ ($post->status == 'published') ? 'btn-info' : 'btn-default' }} btn-xs approve" value="{{ $post->id }}" id="post-show-approve-{{ $post->id }}"><i class="fa fa-shopping-cart"></i> {{ ($post->status == 'published') ? 'duyệt bài' : 'đóng bài' }}</button>
+                            <button type="button" class="btn {{ ($post->status == 'published') ? 'btn-info' : 'btn-danger' }} btn-xs approve" value="{{ $post->id }}" id="post-show-approve-{{ $post->id }}"><i class="fa fa-lock"></i> {{ ($post->status == 'published') ? 'duyệt bài' : 'đóng bài' }}</button>
                             @endcan
                         </span>
                         <p><b>Hãng:</b> {{ $post->branch }}</p>
@@ -63,8 +63,8 @@
             <div class="category-tab shop-details-tab"><!--category-tab-->
                 <div class="col-sm-12">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#details" data-toggle="tab">Details</a></li>
-                        <li><a href="#reviews" data-toggle="tab">Reviews (5)</a></li>
+                        <li class="active"><a href="#details" data-toggle="tab">Thông tin chi tiết</a></li>
+                        <li><a href="#reviews" data-toggle="tab">Bình luận</a></li>
                     </ul>
                 </div>
                 <div class="tab-content">
@@ -101,7 +101,7 @@
                                     <input type="hidden" name="post_id" value="{{ $post->id }}" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" class="btn btn-warning" value="Add Comment" />
+                                    <input type="submit" class="btn btn-warning" value="Thêm bình luận" />
                                 </div>
                             </form>
                         </div>
