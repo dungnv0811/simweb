@@ -62,6 +62,7 @@ class PostProductService
 
     public function getProducts(Request $request)
     {
+        $column = ['posts.*'];
         $condition = [];
             if ($request->get('title')) {
                 $condition[] = ['title', 'LIKE', '%' . $request->get('title') . '%'];
@@ -88,7 +89,7 @@ class PostProductService
         return $this->product
             ->address()
             ->where($condition)
-            ->paginate(6);
+            ->paginate(6, $column);
     }
 
     public function getProductSuggestion()
