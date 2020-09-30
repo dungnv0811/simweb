@@ -10,10 +10,15 @@
                     <div class="product-image-wrapper">
                         <div class="single-products">
                             <div class="productinfo text-center">
-                                <img src="images/home/recommend1.jpg" alt="" />
-                                <h2>$56</h2>
+                                @if(empty(json_decode($recommendedPost->images, true)))
+                                <img src="{{url('/uploads/images/product/default.jpg')}}" alt="" />
+                                @else
+                                <img src="{{url('/uploads/images/product/'.json_decode($recommendedPost->images, true)[0])}}" alt="" />
+                                @endif
+
+                                <h2>{{ $recommendedPost->price }}K VNĐ</h2>
                                 <p>{{ $recommendedPost->title }}</p>
-                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                <a href="#" class="btn btn-info"><i class="fa fa-info-circle"></i> Chi tiết</a>
                             </div>
 
                         </div>
@@ -39,16 +44,20 @@
             <div class="product-image-wrapper">
                 <div class="single-products">
                     <div class="productinfo text-center">
-                        <img src="images/home/product2.jpg" alt="" />
-                        <h2>$56</h2>
+                        @if(empty(json_decode($post->images, true)))
+                        <img src="{{url('/uploads/images/product/default.jpg')}}" alt="" />
+                        @else
+                        <img src="{{url('/uploads/images/product/'.json_decode($post->images, true)[0])}}" alt="" />
+                        @endif
+                        <h2>{{ $post->price }}K VNĐ</h2>
                         <p>{{ $post->title }}</p>
-                        <a href="{{ route('posts.show', $post->slug) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Xem bài</a>
+                        <a href="{{ route('posts.show', $post->slug) }}" class="btn btn-default add-to-cart"><i class="fa fa-info-circle"></i>Chi tiết</a>
                     </div>
                 </div>
                 <div class="choose">
                     <ul class="nav nav-pills nav-justified">
-                        <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-                        <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+                        <li><i class="fa fa-group"></i>Hãng: {{ $post->branch }}</li>
+                        <li><i class="fa fa-plus-square"></i>Đời máy: {{ $post->model }}</li>
                     </ul>
                 </div>
             </div>
