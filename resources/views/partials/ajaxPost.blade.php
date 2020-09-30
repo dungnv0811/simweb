@@ -18,7 +18,7 @@
 
                                 <h2>{{ $recommendedPost->price }}K VNĐ</h2>
                                 <p>{{ $recommendedPost->title }}</p>
-                                <a href="#" class="btn btn-info"><i class="fa fa-info-circle"></i> Chi tiết</a>
+                                <a href="{{ route('posts.show', $recommendedPost->slug) }}" class="btn btn-info"><i class="fa fa-info-circle"></i> Chi tiết</a>
                             </div>
 
                         </div>
