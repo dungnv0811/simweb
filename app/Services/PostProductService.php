@@ -60,6 +60,17 @@ class PostProductService
 
     }
 
+    /**
+     * @param Request $request
+     */
+    public function updateProduct(Request $request)
+    {
+        $param = $request->only($this->product->getFillable());
+        $data = $this->handleParam($param);
+        $condition = ['posts.id' => $request->get('id')];
+        $this->product->where($condition)->update($data);
+    }
+
     public function getProducts(Request $request)
     {
         $column = ['posts.*'];
@@ -81,14 +92,20 @@ class PostProductService
                 $splitPrice = explode(',', $request->get('price'), 2);
                 $minPrice = $splitPrice[0];
                 $maxPrice = $splitPrice[1];
-                $condition['price'] = [
-                    ['price', '>=', $minPrice],
-                    ['price', '<=', $maxPrice]
+                $condition[] = [
+                    function($query) use ($minPrice, $maxPrice) {
+                        $query->where([
+                            ['price', '>=', $minPrice],
+                            ['price', '<=', $maxPrice],
+                        ]);
+
+                    }
                 ];
             }
         return $this->product
             ->address()
             ->where($condition)
+            ->orderByDesc('posts.id')
             ->paginate(6, $column);
     }
 
@@ -100,7 +117,6 @@ class PostProductService
         return $this->product
             ->where($condition)
             ->paginate(6);
-
     }
 
 

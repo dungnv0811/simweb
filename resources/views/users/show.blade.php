@@ -151,7 +151,7 @@
         };
 
         $.ajax({
-            url:"{{ route('user.updateUser') }}",
+            url:"{{ route('users.update', $user->id) }}",
             method:"POST",
             data: data,
             success:function(data) {

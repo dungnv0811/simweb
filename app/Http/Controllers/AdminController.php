@@ -38,18 +38,4 @@ class AdminController extends Controller
         }
     }
 
-
-    function updatePost(Request $request) {
-        if ($request->ajax()) {
-            return $request;
-            // TODO update data of post duyệt bài
-//            $data = array(
-//                $request->column_name       =>  $request->column_value
-//            );
-//            DB::table('post')
-//                ->where('id', $request->id)
-//                ->update($data);
-//            echo '<div class="alert alert-success">Data Updated</div>';
-        }
-    }
 }

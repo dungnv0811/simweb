@@ -54,7 +54,7 @@
                         </span>
                         <p><b>Hãng:</b> {{ $post->branch }}</p>
                         <p><b>Đời máy:</b> {{ $post->model }}</p>
-                        <p><b>Tình trạng:</b> {{ $post->status }}</p>
+                        <p><b>Tình trạng:</b> {{ $post->state_label }}</p>
                         <a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
                     </div><!--/product-information-->
                 </div>

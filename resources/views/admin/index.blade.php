@@ -132,9 +132,8 @@
             price: $("#price").val(),
             _token:_token
         };
-
         $.ajax({
-            url:"{{ route('admin.updatePost') }}",
+            url:"{{ route('posts.update') }}",
             method:"POST",
             data: data,
             success:function(data) {

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\PostProduct;
 use App\Services\AddressService;
 use App\Services\CityService;
 use App\Services\PostProductService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -85,9 +87,11 @@ class PostProductController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $data = $this->postProductService->getProductDetail($slug);
+        return view('post_products.edit', compact('data'));
+
     }
 
     /**
@@ -97,13 +101,13 @@ class PostProductController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(UpdateProductRequest $request)
     {
-        $post = PostProduct::findOrFail($request->post_id);
+        $this->postProductService->updateProduct($request);
 
-        $post->update($request->all());
-
-        return back();
+        $request->session()->flash('message', trans('common.create_success'));
+        return redirect()->route('posts.index');
+        return response([], Response::HTTP_NO_CONTENT);
     }
 
     /**

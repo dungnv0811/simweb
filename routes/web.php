@@ -73,8 +73,8 @@ Route::group(['middleware' => ['auth']], function () {
         });
         Route::get('/admin/index','AdminController@index')->name('admin.index');
         Route::post('/admin/approvePost', 'AdminController@approvePost')->name('admin.approvePost');
-        Route::post('/admin/updatePost', 'AdminController@updatePost')->name('admin.updatePost');
         Route::post('/posts/delete', 'PostProductController@delete')->name('posts.delete');
+        Route::post('/admin/posts', 'PostProductController@update')->name('posts.update');
 
     });
 
