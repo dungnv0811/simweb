@@ -36,8 +36,8 @@
         <div class="price-range"><!--price-range-->
             <h2>Giá tiền (triệu đồng)</h2>
             <div class="well text-center">
-                <input type="text" class="span2" name="price" value="20" data-slider-min="0" data-slider-max="20" data-slider-step="2" data-slider-value="[0,20]" id="posts-index-sidebar" >
-                <b class="pull-left">0 Triệu</b> <b class="pull-right">20 Triệu</b>
+                <input type="text" class="span2" name="price" value="10" data-slider-min="0" data-slider-max="10" data-slider-step="2" data-slider-value="[0,10]" id="posts-index-sidebar" >
+                <b class="pull-left">0 Triệu</b> <b class="pull-right">10 Triệu</b>
 
             </div>
         </div><!--/price-range-->

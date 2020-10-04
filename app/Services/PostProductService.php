@@ -90,8 +90,8 @@ class PostProductService
             if ($request->get('price') && $request->get('price') != 20) {
                 // TODO whereBetween('price', [$min_price, $max_price])
                 $splitPrice = explode(',', $request->get('price'), 2);
-                $minPrice = $splitPrice[0];
-                $maxPrice = $splitPrice[1];
+                $minPrice = $splitPrice[0]*1000;
+                $maxPrice = $splitPrice[1]*1000;
                 $condition[] = [
                     function($query) use ($minPrice, $maxPrice) {
                         $query->where([
