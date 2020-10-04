@@ -87,7 +87,7 @@ class PostProductService
             if ($request->get('district')) {
                 $condition[] = ['districts.code', '=', $request->get('district')];
             }
-            if ($request->get('price') && $request->get('price') != 20) {
+            if ($request->get('price') && $request->get('price') != 10) {
                 // TODO whereBetween('price', [$min_price, $max_price])
                 $splitPrice = explode(',', $request->get('price'), 2);
                 $minPrice = $splitPrice[0]*1000;
