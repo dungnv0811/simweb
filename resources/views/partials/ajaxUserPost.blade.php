@@ -13,7 +13,7 @@
             <a href="{{ route('posts.show', $post->id) }}" class=""><i class="fa fa-shopping-cart"></i>{{ $post->slug }}</a>
         </td>
         <td>
-            {{ $post->created_at }}
+            {{ Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
         </td>
 
         <td>

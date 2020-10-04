@@ -76,9 +76,8 @@
                             <li class="list-group-item">Người bán:</li>
                             <li class="list-group-item">Liên lạc:</li>
                             <li class="list-group-item">Địa chỉ: {{ $post->path_with_type }}</li>
-                            <li class="list-group-item">Fourth item</li>
                         </ul>
-                        Bài đăng được tạo ngày: {{ $post->created_at }}
+                        Bài đăng được tạo: {{ Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
                     </div>
 
                     <div class="tab-pane fade" id="reviews" >

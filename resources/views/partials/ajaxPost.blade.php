@@ -18,6 +18,7 @@
 
                                 <h2>{{ $recommendedPost->price }}K VNĐ</h2>
                                 <p>{{ $recommendedPost->title }}</p>
+                                <p><i class="fa fa-clock-o"></i> {{ Carbon\Carbon::parse($recommendedPost->created_at)->diffForHumans()}}</p>
                                 <a href="{{ route('posts.show', $recommendedPost->slug) }}" class="btn btn-info"><i class="fa fa-info-circle"></i> Chi tiết</a>
                             </div>
 
@@ -57,7 +58,7 @@
                 <div class="choose">
                     <ul class="nav nav-pills nav-justified">
                         <li><i class="fa fa-group"></i>Hãng: {{ $post->branch }}</li>
-                        <li><i class="fa fa-plus-square"></i>Đời máy: {{ $post->model }}</li>
+                        <li><i class="fa fa-clock-o"></i> {{ Carbon\Carbon::parse($post->created_at)->diffForHumans()}}</li>
                     </ul>
                 </div>
             </div>
