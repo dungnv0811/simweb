@@ -68,13 +68,6 @@
                                 <a class="btn btn-info" href="{{ route('social.login', ['provider' => 'facebook']) }}">
                                 <i class="fa fa-facebook"></i>&nbsp; Đăng nhập bằng Facebook</a>
                             </div>
-                            @if ($errors->any())
-                            <div class="alert alert-danger text-center">
-                                @foreach ($errors->all() as $error)
-                                <div>{{ $error }}</div>
-                                @endforeach
-                            </div>
-                            @endif
                         </div>
                     </form>
                 </div>
