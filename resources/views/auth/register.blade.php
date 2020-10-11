@@ -41,6 +41,50 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label for="status" class="col-md-4 control-label">Giới tính</label>
+
+                            <div class="col-md-6" class="radio-inline">
+                                <div class="col-md-4">
+                                    <label class="radio-inline"><input type="radio" name="gender" value="{{ \App\Models\User::UNDEFINED }}">Không xác định</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="radio-inline"><input type="radio" name="gender" value="{{ \App\Models\User::MALE }}">Nam</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="radio-inline"><input type="radio" name="gender" value="{{ \App\Models\User::FEMALE }}">Nữ</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                            <label for="phone" class="col-md-4 control-label">Điện thoại</label>
+
+                            <div class="col-md-6">
+                                <input id="phone" type="phone" class="form-control" name="phone" value="{{ old('phone') }}" required>
+
+                                @if ($errors->has('phone'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('phone') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                            <label for="address" class="col-md-4 control-label">Địa chỉ</label>
+
+                            <div class="col-md-6">
+                                <input id="address" type="address" class="form-control" name="address" value="{{ old('address') }}" required>
+
+                                @if ($errors->has('address'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('address') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Mật khẩu</label>
 
