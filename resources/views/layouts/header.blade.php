@@ -5,7 +5,7 @@
                 <div class="col-sm-6">
                     <div class="contactinfo">
                         <ul class="nav nav-pills">
-                            <li><a href="#"><i class="fa fa-phone"></i> +84 986 605 612</a></li>
+                            <li><a href="#"><i class="fa fa-phone"></i> +84 905 606 289</a></li>
                             <li><a href="#"><i class="fa fa-envelope"></i> dungnv.itdn@gmail.com</a></li>
                         </ul>
                     </div>

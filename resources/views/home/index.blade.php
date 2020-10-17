@@ -1,68 +1,29 @@
 @extends('layouts.app')
+<link href="{{ asset('css/swipper.css') }}" rel="stylesheet">
+@section('css')
+@endsection
+
 @section('slider')
 <section id="slider"><!--slider-->
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <div id="slider-carousel" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#slider-carousel" data-slide-to="1"></li>
-                        <li data-target="#slider-carousel" data-slide-to="2"></li>
-                    </ol>
-
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <div class="col-sm-6">
-                                <h1><span>E</span>-SHOPPER</h1>
-                                <h2>Free E-Commerce Template</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. </p>
-                                <button type="button" class="btn btn-default get">Get it now</button>
-                            </div>
-                            <div class="col-sm-6">
-<!--                                <img src="images/home/girl1.jpg" class="girl img-responsive" alt=""/>-->
-<!--                                <img src="images/home/pricing.png" class="pricing" alt=""/>-->
-                            </div>
+                <!-- Slider main container -->
+                <div class="swiper-container main-slider" id="myCarousel">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide slider-bg-position index-slide1" data-hash="slide1">
+<!--                            <h2>It is health that is real wealth and not pieces of gold and silver</h2>-->
                         </div>
-                        <div class="item">
-                            <div class="col-sm-6">
-                                <h1><span>E</span>-SHOPPER</h1>
-                                <h2>100% Responsive Design</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. </p>
-                                <button type="button" class="btn btn-default get">Get it now</button>
-                            </div>
-                            <div class="col-sm-6">
-<!--                                <img src="images/home/girl2.jpg" class="girl img-responsive" alt=""/>-->
-<!--                                <img src="images/home/pricing.png" class="pricing" alt=""/>-->
-                            </div>
+                        <div class="swiper-slide slider-bg-position index-slide2" data-hash="slide2">
+<!--                            <h2>Happiness is nothing more than good health and a bad memory</h2>-->
                         </div>
-
-                        <div class="item">
-                            <div class="col-sm-6">
-                                <h1><span>E</span>-SHOPPER</h1>
-                                <h2>Free Ecommerce Template</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. </p>
-                                <button type="button" class="btn btn-default get">Get it now</button>
-                            </div>
-                            <div class="col-sm-6">
-<!--                                <img src="images/home/girl3.jpg" class="girl img-responsive" alt=""/>-->
-<!--                                <img src="images/home/pricing.png" class="pricing" alt=""/>-->
-                            </div>
-                        </div>
-
                     </div>
-
-                    <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
-                        <i class="fa fa-angle-left"></i>
-                    </a>
-                    <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
+                    <!-- Add Navigation -->
+                    <div class="swiper-button-prev"><i class="fa fa-angle-left"></i></div>
+                    <div class="swiper-button-next"><i class="fa fa-angle-right"></i></div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -85,7 +46,19 @@
 @endsection
 
 @push('javascript')
+<script src="{{ asset('js/swipper.js') }}"></script>
 <script type="text/javascript">
+
+    var swiper = new Swiper('.swiper-container', {
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+          autoplay: {
+            delay: 3000,
+          },
+        });
+
     $(window).on('hashchange', function() {
         if (window.location.hash) {
             var page = window.location.hash.replace('#', '');
