@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use App\Libraries\Traits\Image;
+use App\Casts\MoneyFormatCast;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+
 
 class PostProduct extends Model
 {
@@ -29,17 +31,36 @@ class PostProduct extends Model
         'is_recommended'
     ];
 
+    protected $casts = [
+        'price' => MoneyFormatCast::class
+    ];
 
     const NEW = 0;
     const SECONDHAND = 1;
 
     const IS_RECOMMEND = 1;
 
-    public function comments() {
+    const AWAITING_APPROVAL = 0;
+    const APPROVED = 1;
+
+    public function comments()
+    {
         return $this->morphMany(PostComment::class, 'commentable')->whereNull('parent_id');
     }
 
+    /**
+     * @param Builder $builder
+     * @return Builder
+     */
+    public function scopeStatusApprovedCondition(Builder $builder)
+    {
+        return $builder->where(['status' => self::APPROVED]);
+    }
 
+    /**
+     * @param $query
+     * @return mixed
+     */
     public function scopeAddress($query)
     {
         return $query->join('wards', 'wards.code', '=', 'posts.ward_code')
@@ -57,7 +78,7 @@ class PostProduct extends Model
     {
         $result = [];
         foreach (json_decode($this->images) as $key => $image) {
-            $result[$key] = asset('/uploads/images' . DIRECTORY_SEPARATOR .  config('define.image.product') . DIRECTORY_SEPARATOR . $image);
+            $result[$key] = asset('/uploads/images' . DIRECTORY_SEPARATOR . config('define.image.product') . DIRECTORY_SEPARATOR . $image);
         }
         return $result;
     }

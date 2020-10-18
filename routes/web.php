@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
 Auth::routes();
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
@@ -72,7 +69,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::put('review', 'PostProductController@review');
         });
         Route::get('/admin/index','AdminController@index')->name('admin.index');
-        Route::post('/admin/approvePost', 'AdminController@approvePost')->name('admin.approvePost');
+        Route::post('/admin/approvePost', 'PostProductController@approvedProduct')->name('admin.approvePost');
         Route::post('/posts/delete', 'PostProductController@delete')->name('posts.delete');
         Route::post('/admin/posts', 'PostProductController@update')->name('posts.update');
 

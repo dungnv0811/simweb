@@ -32,7 +32,7 @@ class PostProductRequest extends FormRequest
             'description' => ['required'],
             'state' => ['required'],
             'branch' => ['required'],
-            'price' => ['required',],
+            'price' => ['required', 'max:16'],
             'images.*' => ['required'],
         ];
     }

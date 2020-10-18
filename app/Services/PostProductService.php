@@ -7,7 +7,6 @@ use App\Libraries\Traits\Image;
 use App\Models\PostProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class PostProductService
 {
@@ -25,7 +24,7 @@ class PostProductService
 
     private function handleParam(array $param): array
     {
-        $param['price'] = floatval($param['price']);
+        $param['price'] = filter_var($param['price'], FILTER_SANITIZE_NUMBER_INT);
         $param['slug'] = $param['title'] . '-' . time();
         $param['user_id'] = Auth::id();
         $param['short_description'] = substr($param['title'], 128);
@@ -90,8 +89,8 @@ class PostProductService
             if ($request->get('price') && $request->get('price') != 10) {
                 // TODO whereBetween('price', [$min_price, $max_price])
                 $splitPrice = explode(',', $request->get('price'), 2);
-                $minPrice = $splitPrice[0]*1000;
-                $maxPrice = $splitPrice[1]*1000;
+                $minPrice = $splitPrice[0] * 1000000;
+                $maxPrice = $splitPrice[1] * 1000000;
                 $condition[] = [
                     function($query) use ($minPrice, $maxPrice) {
                         $query->where([
@@ -104,6 +103,7 @@ class PostProductService
             }
         return $this->product
             ->address()
+            ->statusApprovedCondition()
             ->where($condition)
             ->orderByDesc('posts.id')
             ->paginate(6, $column);
@@ -119,5 +119,22 @@ class PostProductService
             ->paginate(6);
     }
 
+    /**
+     * @param $id
+     */
+    public function changeStatusProduct($id)
+    {
+        $param = ['status' => PostProduct::APPROVED];
+        try {
+            $this->product
+                ->where(['posts.id' => $id])
+                ->update($param);
+        } catch (\Exception $e) {
+            info($e);
+            return false;
+        }
+        return true;
+
+    }
 
 }

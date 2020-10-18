@@ -23,7 +23,7 @@ class CreatePostsTable extends Migration
             $table->foreign('ward_code')->references('code')->on('wards')->onDelete('cascade');
             $table->string('branch', 100);
             $table->string('model', 100)->nullable();
-            $table->float('price');
+            $table->float('price', 16, 2);
             $table->string('images');
             $table->string('short_description', 160);
             $table->longText('description');

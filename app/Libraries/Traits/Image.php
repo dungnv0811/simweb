@@ -5,6 +5,8 @@ namespace App\Libraries\Traits;
 
 
 use Illuminate\Http\UploadedFile;
+use \Intervention\Image\Facades\Image As InterventionImage;
+use Illuminate\Support\Facades\Storage;
 
 
 trait Image
@@ -23,7 +25,11 @@ trait Image
             foreach ($images as $key => $image) {
                 $ext = is_object($image) ? $image->getClientOriginalExtension() :  pathinfo($image)['basename'];
                 $filename = time() . '-' .  uniqid() .  '.' . $ext;
-                $image->move(public_path('uploads/images' . DIRECTORY_SEPARATOR  . $folder), $filename);
+                $resizeImage = InterventionImage::make($image);
+                //Resize image.
+                $resizeImage->fit(499, 499, function($constraint){
+                    $constraint->aspectRatio();
+                })->save(public_path('uploads/images' . DIRECTORY_SEPARATOR  . $folder  . DIRECTORY_SEPARATOR . $filename));
                 $names[$key] = $filename;
             }
         } catch (\Exception $e) {

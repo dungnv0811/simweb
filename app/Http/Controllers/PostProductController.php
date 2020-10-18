@@ -138,4 +138,19 @@ class PostProductController extends Controller
 
         return "deleted successfully";
     }
+
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|Response
+     */
+    public function approvedProduct(Request $request)
+    {
+        if ($request->ajax()) {
+            if ($this->postProductService->changeStatusProduct($request->get('id'))) {
+                return response([], Response::HTTP_NO_CONTENT);
+            }
+        }
+    }
+
 }
