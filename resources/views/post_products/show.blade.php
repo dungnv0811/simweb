@@ -129,7 +129,7 @@
                 method:"POST",
                 data:{id:id, _token:_token},
                 success:function(data) {
-                    if ("{{ $post->status }}".localeCompare("published")) {
+                    if ("{{ $post->status }}".localeCompare({{ \App\Models\PostProduct::APPROVED }})) {
                         button.html("đóng bài");
                     } else {
                         button.html("duyệt bài");

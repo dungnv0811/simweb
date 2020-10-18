@@ -4,11 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\PostProduct;
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+
+    /**
+     * @var UserService
+     */
+    private $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -42,7 +55,6 @@ class UserController extends Controller
     public function show(Request $request)
     {
         $user = Auth::user();
-
         $posts = PostProduct::where('user_id', $user->id)->paginate(10);
         if ($request->ajax()) {
             return view('partials.ajaxUserPost', compact('user', 'posts'));
@@ -65,18 +77,19 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, int $id)
     {
+        if ($request->ajax()) {
+            if($this->userService->updateUser($request, $id)) {
+                return response([], Response::HTTP_NO_CONTENT);
+            }
 
-        $user = User::findOrFail($request->user_id);
+        }
 
-        $user->update($request->all());
-
-        return back();
     }
 
     /**
@@ -91,13 +104,5 @@ class UserController extends Controller
         $user->delete();
 
         return back();
-    }
-
-
-    function updateUser(Request $request) {
-        if ($request->ajax()) {
-            return $request;
-            // TODO update data of user
-        }
     }
 }

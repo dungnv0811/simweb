@@ -49,4 +49,12 @@ class User extends Authenticatable
     {
         $this->attributes['email'] = strtolower($value);
     }
+
+    /**
+     * @return array|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Translation\Translator|string|null
+     */
+    public function getGenderLabelAttribute()
+    {
+        return trans("user.gender.$this->gender");
+    }
 }

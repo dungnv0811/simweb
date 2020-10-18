@@ -52,7 +52,7 @@
                         </tr>
                         <tr>
                             <th>Giới tính:</th>
-                            <th>{{ $user->gender}}</th>
+                            <th>{{ $user->gender_label}}</th>
                         </tr>
                         <tr>
                             <th>Số điện thoại:</th>
@@ -143,19 +143,23 @@
         var data = {
             id: "{{ $user->id }}",
             name: $("#name").val(),
-            gender: $("#gender").val(),
+            gender: $('input[name ="gender"]').val(),
             email: $("#email").val(),
             phone: $("#phone").val(),
             address: $("#address").val(),
             _token:_token
         };
+        var page = $('.page-item.active').text();
+
 
         $.ajax({
             url:"{{ route('users.update', $user->id) }}",
-            method:"POST",
+            method:"PUT",
             data: data,
             success:function(data) {
+                location.reload();
             }
+
         });
 
         $("#show-edit-user-model").modal("hide");
