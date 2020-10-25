@@ -16,14 +16,14 @@
     @foreach ($posts as $post)
     <tr>
         <td>
-            <a href="{{ route('posts.show', $post->slug) }}" class=""><i class="fa fa-shopping-cart"></i>{{ $post->slug }}</a>
+            <a href="{{ route('posts.show', $post->slug) }}" class="">{{ $post->slug }}</a>
         </td>
         <td>
             {{ $post->created_at }}
         </td>
 
         <td>
-            assasasa
+            {{ $post->state_label }}
         </td>
 
         <td class="text-center">

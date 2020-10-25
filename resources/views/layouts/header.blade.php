@@ -42,15 +42,15 @@
                                 <li><a href="{{ url('/register') }}"><i class="fa fa-lock"></i> Đăng kí</a></li>
                             @else
                                 @can('isAdmin')
-                                    <li><a href="{{ route('admin.index') }}"><i class="fa fa-check-square"></i>Quản
+                                    <li><a href="{{ route('admin.index') }}"><i class="fa fa-tasks"></i>Quản
                                             lý</a></li>
                                 @endcan
                                 <li><a href="{{ route('users.show', Auth::user()->email) }}"><i class="fa fa-user"></i> Cá
                                         nhân</a></li>
-                                <li><a href="{{ url('/posts/create') }}"><i class="fa fa-crosshairs"></i> Đăng tin</a>
+                                <li><a href="{{ url('/posts/create') }}"><i class="fa fa-plus-square"></i> Đăng tin</a>
                                 </li>
                                 <li><a><i class="fa fa-lock"></i> {{ Auth::user()->name }}</a></li>
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-lock"></i> Đăng xuất</a></li>
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out"></i> Đăng xuất</a></li>
                             @endif
                         </ul>
                     </div>
