@@ -30,13 +30,13 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="{{ url('/') }}"><img src={{url('/images/home/logo.png')}} alt=""/></a>
+                        <a href="{{ url('/') }}"><img src={{url('/images/home/logo.png')}} alt="Trang chủ"/></a>
                     </div>
                 </div>
                 <div class="col-sm-8">
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
-
+                            <li><a href="{{ url('/') }}"><i class="fa fa-home"></i> Trang chủ</a></li>
                             @if (Auth::guest())
                                 <li><a href="{{ url('/login') }}"><i class="fa fa-lock"></i> Đăng nhập</a></li>
                                 <li><a href="{{ url('/register') }}"><i class="fa fa-lock"></i> Đăng kí</a></li>
