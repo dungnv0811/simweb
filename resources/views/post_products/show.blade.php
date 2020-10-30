@@ -116,7 +116,10 @@
 @endsection
 
 @push('javascript')
-<script type="text/javascript">
+
+    {!! JsValidator::formRequest('App\Http\Requests\PostCommentRequest') !!}
+
+    <script type="text/javascript">
     var _token = $('input[name="_token"]').val();
 
     $(document).on('click', '.approve', function(){

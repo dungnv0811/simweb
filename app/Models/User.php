@@ -47,20 +47,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'social' => 'array',
     ];
 
-    /**
-     * Bootstrap the model and its traits.
-     *
-     * @return void
-     */
-    protected static function boot()
-    {
-        parent::boot();
-//        static::addGlobalScope('verify', function ($builder) {
-//            $builder->where(
-//                'email_verified_at', '<=', now()->toDateTimeString()
-//            );
-//        });
-    }
 
     // BTW: in most of case you should keep email in lowercase
     public function setEmailAttribute($value)

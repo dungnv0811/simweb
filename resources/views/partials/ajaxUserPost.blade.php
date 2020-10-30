@@ -17,7 +17,6 @@
         </td>
 
         <td>
-            assasasa
         </td>
 
         <td class="text-center">

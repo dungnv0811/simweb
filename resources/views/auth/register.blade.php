@@ -1,5 +1,7 @@
+@php
+use App\Models\User;
+@endphp
 @extends('layouts.master')
-
 @section('content')
 <div class="container" style="padding-top: 60px; padding-bottom: 60px;">
     <div class="row">
@@ -40,26 +42,29 @@
                                 @endif
                             </div>
                         </div>
-
-                        <div class="form-group">
+                        <div class="form-group @error('gender') has-error @enderror">
                             <label for="status" class="col-md-4 control-label">Giới tính</label>
 
                             <div class="col-md-6" class="radio-inline">
                                 <div class="col-md-4">
-                                    <label class="radio-inline"><input type="radio" name="gender" value="{{ \App\Models\User::UNDEFINED }}">Không xác định</label>
+                                    <label class="radio-inline"><input type="radio" name="gender" value="{{ User::UNDEFINED }}" @if(old('gender') == User::UNDEFINED) checked @endif>Không xác định</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="radio-inline"><input type="radio" name="gender" value="{{ \App\Models\User::MALE }}">Nam</label>
+                                    <label class="radio-inline"><input type="radio" name="gender" value="{{ User::MALE }}" @if(old('gender') == User::MALE) checked @endif>Nam</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="radio-inline"><input type="radio" name="gender" value="{{ \App\Models\User::FEMALE }}">Nữ</label>
+                                    <label class="radio-inline"><input type="radio" name="gender" value="{{ User::FEMALE }}" @if(old('gender') == User::FEMALE) checked @endif>Nữ</label>
                                 </div>
+                                @error('gender')
+                                    <span class="help-block"><strong>{{ $errors->first('gender') }}</strong></span>
+
+                                @enderror
                             </div>
+
                         </div>
 
                         <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
                             <label for="phone" class="col-md-4 control-label">Điện thoại</label>
-
                             <div class="col-md-6">
                                 <input id="phone" type="phone" class="form-control" name="phone" value="{{ old('phone') }}" required>
 

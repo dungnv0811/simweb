@@ -18,7 +18,6 @@ Auth::routes(['verify' => true]);
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/', 'PostProductController@index')->name('home');
 
-Route::post('/comments/store', 'PostCommentController@store')->name('comments.store');
 Route::post('/reply/store', 'PostCommentController@replyStore')->name('reply.store');
 
 
@@ -55,6 +54,7 @@ Route::get('/login/{provider}/callback', 'Auth\LoginController@handleProviderCal
  * Authentication group.
  */
 Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::post('/comments/store', 'PostCommentController@store')->name('comments.store');
     Route::resource('users', 'UserController');
     Route::resource('posts', 'PostProductController')->only(['create', 'store', 'delete']);
 
