@@ -48,9 +48,9 @@
                         <p>Thông tin: {{ $post->short_description }}</p>
                         <span>
                             <span>{{ $post->price }}K VNĐ</span>
-                            @can('isAdmin')
-                            <button type="button" class="btn {{ ($post->status == 'published') ? 'btn-info' : 'btn-danger' }} btn-xs approve" value="{{ $post->id }}" id="post-show-approve-{{ $post->id }}"><i class="fa fa-lock"></i> {{ ($post->status == 'published') ? 'duyệt bài' : 'đóng bài' }}</button>
-                            @endcan
+<!--                            @can('isAdmin')-->
+<!--                            <button type="button" class="btn {{ ($post->status == 'published') ? 'btn-info' : 'btn-danger' }} btn-xs approve" value="{{ $post->id }}" id="post-show-approve-{{ $post->id }}"><i class="fa fa-lock"></i> {{ ($post->status == 'published') ? 'duyệt bài' : 'đóng bài' }}</button>-->
+<!--                            @endcan-->
                         </span>
                         <p><b>Hãng:</b> {{ $post->branch }}</p>
                         <p><b>Đời máy:</b> {{ $post->model }}</p>
