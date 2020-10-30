@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/', 'PostProductController@index')->name('home');
@@ -54,7 +54,7 @@ Route::get('/login/{provider}/callback', 'Auth\LoginController@handleProviderCal
 /**
  * Authentication group.
  */
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('users', 'UserController');
     Route::resource('posts', 'PostProductController')->only(['create', 'store', 'delete']);
 
@@ -63,7 +63,7 @@ Route::group(['middleware' => ['auth']], function () {
     /**
      * Admin group.
      */
-    Route::group(['middleware' => ['can:isAdmin']], function () {
+    Route::group(['middleware' => ['can:isAdmin', 'verified']], function () {
 
         Route::group(['prefix' => 'post'], function () {
             Route::put('review', 'PostProductController@review');
@@ -86,7 +86,7 @@ Route::group(['middleware' => ['auth']], function () {
     /**
      * User group.
      */
-    Route::group(['middleware' => ['can:isAdmin,isAuthor,isUser']], function () {
+    Route::group(['middleware' => ['can:isAdmin,isAuthor,isUser', 'verified']], function () {
         Route::put('/user/updateUser', 'UserController@update')->name('user.updateUser');
     });
 });

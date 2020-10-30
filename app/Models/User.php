@@ -7,7 +7,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Authenticatable
+/**
+ * @property mixed name
+ */
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
     use SoftDeletes;
@@ -43,6 +46,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'social' => 'array',
     ];
+
+    /**
+     * Bootstrap the model and its traits.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+//        static::addGlobalScope('verify', function ($builder) {
+//            $builder->where(
+//                'email_verified_at', '<=', now()->toDateTimeString()
+//            );
+//        });
+    }
 
     // BTW: in most of case you should keep email in lowercase
     public function setEmailAttribute($value)

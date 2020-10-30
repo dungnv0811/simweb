@@ -4,7 +4,9 @@ namespace App\Http\Middleware;
 
 use App\Providers\RouteServiceProvider;
 use Closure;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class RedirectIfAuthenticated
 {
@@ -21,6 +23,11 @@ class RedirectIfAuthenticated
         if (Auth::guard($guard)->check()) {
             return redirect(RouteServiceProvider::HOME);
         }
+        if (($request->user() instanceof MustVerifyEmail &&
+                ! $request->user()->hasVerifiedEmail())) {
+            return \redirect('/');
+        }
+
 
         return $next($request);
     }
