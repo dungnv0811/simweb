@@ -10,11 +10,9 @@
             <div class="media-body">
                 <ul class="sinlge-post-meta">
                     <li><i class="fa fa-user"></i>{{ $comment->user->name }}</li>
-                    <li><i class="fa fa-clock-o"></i>{{ $comment->created_at->toTimeString() }}</li>
-                    <li><i class="fa fa-calendar"></i> {{ $comment->created_at->format('Y-M-D') }}</li>
+                    <li><i class="fa fa-calendar"></i> {{ Carbon\Carbon::parse($comment->created_at)->diffForHumans()}}</li>
                 </ul>
                 <p>{{ $comment->body }}</p>
-                <a class="btn btn-primary" href="javascript:void(0)"><i class="fa fa-reply"></i>Replay</a>
             </div>
         </li>
         @endforeach
