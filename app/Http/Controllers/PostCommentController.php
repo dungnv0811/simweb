@@ -10,6 +10,19 @@ use Illuminate\Http\Request;
 
 class PostCommentController extends Controller
 {
+
+    public function getPostComment(Request $request)
+    {
+        if ($request->ajax()) {
+            $postId = "$request->get('post_id')";
+            // TODO return all comments of a post
+            $comments = '';
+            return view('partials.commentReply', compact('comments'));
+        }
+        // TODO return empty list
+        return '';
+    }
+
     public function store(PostCommentRequest $request) {
         $comment = new PostComment();
         $comment->body = $request->get('comment_body');

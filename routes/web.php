@@ -55,6 +55,7 @@ Route::get('/login/{provider}/callback', 'Auth\LoginController@handleProviderCal
  */
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/comments/store', 'PostCommentController@store')->name('comments.store');
+    Route::get('/comments/getPostComment', 'PostCommentController@getPostComment')->name('comments.getPostComment');
     Route::resource('users', 'UserController');
     Route::resource('posts', 'PostProductController')->only(['create', 'store', 'delete']);
 

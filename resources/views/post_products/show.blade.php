@@ -157,15 +157,16 @@
 
     function reloadCommentReply() {
        // TODO get the latest comment from post show
-<!--       $.ajax({-->
-<!--            url: '?page=' + page,-->
-<!--            type: "GET",-->
-<!--            data: ''-->
-<!--        }).done(function (data) {-->
-<!--            $("#post-comment-index-list").empty().html(data);-->
-<!--        }).fail(function (jqXHR, ajaxOptions, thrownError) {-->
-<!--            alert('No response from server');-->
-<!--        });-->
+       var postId = "{{ $post->id }}";
+       $.ajax({
+            url: "{{ route('comments.getPostComment') }}",
+            type: "GET",
+            data: {post_id:postId}
+        }).done(function (data) {
+            $("#post-comment-index-list").empty().html(data);
+        }).fail(function (jqXHR, ajaxOptions, thrownError) {
+            alert('No response from server');
+        });
     }
 
 </script>
