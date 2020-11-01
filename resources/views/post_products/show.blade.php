@@ -55,7 +55,6 @@
                         <p><b>Hãng:</b> {{ $post->branch }}</p>
                         <p><b>Đời máy:</b> {{ $post->model }}</p>
                         <p><b>Tình trạng:</b> {{ $post->state_label }}</p>
-                        <a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
                     </div><!--/product-information-->
                 </div>
             </div><!--/product-details-->
@@ -90,10 +89,8 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                             <p><b>Write Your Review</b>
 
-{{--                            {{ dd($post->comments) }}--}}
-
                             @include('partials.commentReply', ['comments' => $post->comments, 'post_id' => $post->id])
-                            <form method="post" action="{{ route('comments.store') }}">
+                            <form method="post" action="{{ route('comments.store') }}" id="post-show-comment-form">
                                 @csrf
                                 <div class="form-group">
                                     <input type="text" name="comment_body" class="form-control" />
@@ -141,6 +138,35 @@
             });
         }
     });
+
+
+    $('#post-show-comment-form').on('submit', function (e){
+        e.preventDefault();
+        var formData = $('#post-show-comment-form').serialize();
+        var url = $('#post-show-comment-form').attr('action');
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData
+        }).done(function (data) {
+            reloadCommentReply();
+        }).fail(function (jqXHR, ajaxOptions, thrownError) {
+            alert('No response from server');
+        });
+    });
+
+    function reloadCommentReply() {
+       // TODO get the latest comment from post show
+<!--       $.ajax({-->
+<!--            url: '?page=' + page,-->
+<!--            type: "GET",-->
+<!--            data: ''-->
+<!--        }).done(function (data) {-->
+<!--            $("#post-comment-index-list").empty().html(data);-->
+<!--        }).fail(function (jqXHR, ajaxOptions, thrownError) {-->
+<!--            alert('No response from server');-->
+<!--        });-->
+    }
 
 </script>
 @endpush
