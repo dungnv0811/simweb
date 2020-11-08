@@ -74,6 +74,18 @@ class PostProduct extends Model
         return $query->join('wards', 'wards.code', '=', 'posts.ward_code');
     }
 
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeUser($query)
+    {
+        return $query->join('users', 'users.id', '=', 'posts.user_id');
+    }
+
+    /**
+     * @return array
+     */
     public function getImageAttribute()
     {
         $result = [];

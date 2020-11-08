@@ -55,6 +55,7 @@
                         <p><b>Hãng:</b> {{ $post->branch }}</p>
                         <p><b>Đời máy:</b> {{ $post->model }}</p>
                         <p><b>Tình trạng:</b> {{ $post->state_label }}</p>
+                        <a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
                     </div><!--/product-information-->
                 </div>
             </div><!--/product-details-->
@@ -82,24 +83,23 @@
                     <div class="tab-pane fade" id="reviews" >
                         <div class="col-sm-12">
                             <ul>
-                                <li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
-                                <li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
-                                <li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
+                                <li><a href=""><i class="fa fa-user"></i>{{ $post->username }}</a></li>
+                                <li><a href=""><i class="fa fa-clock-o"></i>{{ $post->created_at->toTimeString() }}</a></li>
+                                <li><a href=""><i class="fa fa-calendar-o"></i>{{ $post->created_at->format('d M Y') }}</a></li>
                             </ul>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                            <p><b>Write Your Review</b>
+                            <p>{{ $post->description }}</p>
 
                             @include('partials.commentReply', ['comments' => $post->comments, 'post_id' => $post->id])
-                            <form method="post" action="{{ route('comments.store') }}" id="post-show-comment-form">
-                                @csrf
-                                <div class="form-group">
+{{--                            <form method="post" action="javascript:void(0)" id="post-show-comment-form">--}}
+{{--                                @csrf--}}
+                                <div class="form-group" id="post-show-comment-form">
                                     <input type="text" name="comment_body" class="form-control" />
                                     <input type="hidden" name="post_id" value="{{ $post->id }}" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" class="btn btn-warning" value="Thêm bình luận" />
+                                    <input type="submit" class="btn btn-warning btn-comment" value="Thêm bình luận" />
                                 </div>
-                            </form>
+{{--                            </form>--}}
                         </div>
                     </div>
 
@@ -140,14 +140,18 @@
     });
 
 
-    $('#post-show-comment-form').on('submit', function (e){
+    $('.btn-comment').on('click', function (e){
         e.preventDefault();
-        var formData = $('#post-show-comment-form').serialize();
-        var url = $('#post-show-comment-form').attr('action');
+        let content = $('input[name ="comment_body"]').val();
         $.ajax({
-            url: url,
+            url: '/comments',
             type: "POST",
-            data: formData
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data: {
+                post_id:  "{{ $post->id }}",
+                comment_body: content,
+                "_token":  "{{ csrf_token() }}"
+             }
         }).done(function (data) {
             reloadCommentReply();
         }).fail(function (jqXHR, ajaxOptions, thrownError) {
@@ -159,14 +163,14 @@
        // TODO get the latest comment from post show
        var postId = "{{ $post->id }}";
        $.ajax({
-            url: "{{ route('comments.getPostComment') }}",
+            url: "/comments",
             type: "GET",
             data: {post_id:postId}
-        }).done(function (data) {
-            $("#post-comment-index-list").empty().html(data);
-        }).fail(function (jqXHR, ajaxOptions, thrownError) {
-            alert('No response from server');
-        });
+       }).done(function (data) {
+           $("#post-comment-index-list").empty().html(data);
+       }).error(function (jqXHR, ajaxOptions, thrownError) {
+           alert('No response from server');
+       });
     }
 
 </script>

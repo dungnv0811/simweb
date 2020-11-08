@@ -6,21 +6,25 @@ use App\Http\Requests\PostCommentRequest;
 use App\Http\Requests\PostReplyCommentRequest;
 use App\Models\PostComment;
 use App\Models\PostProduct;
+use App\Services\CommentService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class PostCommentController extends Controller
 {
 
-    public function getPostComment(Request $request)
+    /**
+     * @var PostProductService
+     */
+    private $commentService;
+
+    /**
+     * PostCommentController constructor.
+     * @param CommentService $commentService
+     */
+    public function __construct(CommentService $commentService)
     {
-        if ($request->ajax()) {
-            $postId = "$request->get('post_id')";
-            // TODO return all comments of a post
-            $comments = '';
-            return view('partials.commentReply', compact('comments'));
-        }
-        // TODO return empty list
-        return '';
+        $this->commentService = $commentService;
     }
 
     public function store(PostCommentRequest $request) {
@@ -32,7 +36,7 @@ class PostCommentController extends Controller
         return back();
     }
 
-    public function replyStore(PostReplyCommentRequest $request) {
+    public function replyStore(Request $request) {
         $reply = new PostComment();
         $reply->body = $request->get('comment_body');
         $reply->user()->associate($request->user());
@@ -43,5 +47,19 @@ class PostCommentController extends Controller
 
         return back();
 
+    }
+
+    /**
+     * Get list comment by product
+     * @param Request $request
+     * @param $id
+     */
+    public function index(Request $request)
+    {
+       $comments = $this->commentService->getCommentsByProduct($request);
+       if ($comments) {
+           return response($comments, Response::HTTP_OK);
+       }
+       return response([],Response::HTTP_NO_CONTENT);
     }
 }

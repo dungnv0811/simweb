@@ -47,13 +47,15 @@ class PostProductService
 
         $columns = [
             'posts.*',
-            'wards.path_with_type'
+            'wards.path_with_type',
+            'users.name AS username',
         ];
         $condition = [
             'posts.slug' => $slug
         ];
         return $this->product
             ->ward()
+            ->user()
             ->where($condition)
             ->firstOrFail($columns);
 
