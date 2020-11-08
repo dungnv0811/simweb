@@ -7,7 +7,6 @@ use App\Http\Requests\PostReplyCommentRequest;
 use App\Models\PostComment;
 use App\Models\PostProduct;
 use App\Services\CommentService;
-use App\Services\PostProductService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -18,7 +17,6 @@ class PostCommentController extends Controller
      * @var PostProductService
      */
     private $commentService;
-
 
     /**
      * PostCommentController constructor.
@@ -38,7 +36,7 @@ class PostCommentController extends Controller
         return back();
     }
 
-    public function replyStore(PostReplyCommentRequest $request) {
+    public function replyStore(Request $request) {
         $reply = new PostComment();
         $reply->body = $request->get('comment_body');
         $reply->user()->associate($request->user());
@@ -58,9 +56,9 @@ class PostCommentController extends Controller
      */
     public function index(Request $request)
     {
-       $comments = $this->commentService->getCommentsByProduct($request);
-       if ($comments) {
-           return response($comments, Response::HTTP_OK);
+        $comments = $this->commentService->getCommentsByProduct($request);
+        if ($comments) {
+            return view('partials.commentReply', compact('comments'));
        }
        return response([],Response::HTTP_NO_CONTENT);
     }

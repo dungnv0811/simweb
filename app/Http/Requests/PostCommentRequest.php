@@ -23,6 +23,8 @@ class PostCommentRequest extends FormRequest
      */
     public function rules()
     {
+        info("");
+        info(request()->all());
         return [
             'comment_body' => ['required'],
             'post_id' => ['required']

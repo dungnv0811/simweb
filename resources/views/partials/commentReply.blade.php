@@ -1,4 +1,4 @@
-<div class="response-area">
+<div class="response-area" id="post-comment-index-list">
     <h2>{{ $comments->count() }} Bình luận</h2>
     <ul class="media-list">
         @foreach($comments as $comment)

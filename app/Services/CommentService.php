@@ -26,7 +26,7 @@ class CommentService extends BaseService
      */
     public function getCommentsByProduct(Request $request)
     {
-        $productId = $request->get('product');
+        $productId = $request->get('post_id');
         $condition = [
             'commentable_id' => $productId,
             'commentable_type' => "App\Models\PostProduct"

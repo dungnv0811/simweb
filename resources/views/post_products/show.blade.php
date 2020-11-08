@@ -90,16 +90,16 @@
                             <p>{{ $post->description }}</p>
 
                             @include('partials.commentReply', ['comments' => $post->comments, 'post_id' => $post->id])
-                            <form method="post" action="{{ route('comments.store') }}">
-                                @csrf
-                                <div class="form-group">
+{{--                            <form method="post" action="javascript:void(0)" id="post-show-comment-form">--}}
+{{--                                @csrf--}}
+                                <div class="form-group" id="post-show-comment-form">
                                     <input type="text" name="comment_body" class="form-control" />
                                     <input type="hidden" name="post_id" value="{{ $post->id }}" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" class="btn btn-warning" value="Thêm bình luận" />
+                                    <input type="submit" class="btn btn-warning btn-comment" value="Thêm bình luận" />
                                 </div>
-                            </form>
+{{--                            </form>--}}
                         </div>
                     </div>
 
@@ -138,6 +138,49 @@
             });
         }
     });
+
+
+    $('.btn-comment').on('click', function (e) {
+        e.preventDefault();
+        let content = $('input[name ="comment_body"]').val();
+        if (content) {
+            $.ajax({
+                url: '/comments',
+                type: "POST",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data: {
+                    post_id: "{{ $post->id }}",
+                    comment_body: content,
+                    "_token": "{{ csrf_token() }}"
+                }
+            }).done(function (data) {
+                $('input[name ="comment_body"]').val('')
+                reloadCommentReply();
+            }).error(function (jqXHR, ajaxOptions, thrownError) {
+                if (jqXHR.status == 401) {
+                    return document.location.href = '/login';
+                }
+                if (jqXHR.status == 403) {
+                    return document.location.href = '/email/verify';
+                }
+                return alert('No response from server');
+            });
+        }
+    });
+
+    function reloadCommentReply() {
+       // TODO get the latest comment from post show
+       var postId = "{{ $post->id }}";
+       $.ajax({
+            url: "/comments",
+            type: "GET",
+            data: {post_id:postId}
+       }).done(function (data) {
+           $("#post-comment-index-list").empty().html(data);
+       }).error(function (jqXHR, ajaxOptions, thrownError) {
+           alert('No response from server');
+       });
+    }
 
 </script>
 @endpush
