@@ -56,9 +56,9 @@ class PostCommentController extends Controller
      */
     public function index(Request $request)
     {
-       $comments = $this->commentService->getCommentsByProduct($request);
-       if ($comments) {
-           return response($comments, Response::HTTP_OK);
+        $comments = $this->commentService->getCommentsByProduct($request);
+        if ($comments) {
+            return view('partials.commentReply', compact('comments'));
        }
        return response([],Response::HTTP_NO_CONTENT);
     }

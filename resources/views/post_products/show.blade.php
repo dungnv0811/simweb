@@ -154,10 +154,11 @@
                     "_token": "{{ csrf_token() }}"
                 }
             }).done(function (data) {
+                $('input[name ="comment_body"]').val('')
                 reloadCommentReply();
             }).error(function (jqXHR, ajaxOptions, thrownError) {
                 if (jqXHR.status == 401) {
-                    return alert('Đăng nhập tài khoản để bình luận');
+                    return document.location.href = '/login';
                 }
                 if (jqXHR.status == 403) {
                     return document.location.href = '/email/verify';
