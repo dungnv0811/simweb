@@ -140,23 +140,31 @@
     });
 
 
-    $('.btn-comment').on('click', function (e){
+    $('.btn-comment').on('click', function (e) {
         e.preventDefault();
         let content = $('input[name ="comment_body"]').val();
-        $.ajax({
-            url: '/comments',
-            type: "POST",
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            data: {
-                post_id:  "{{ $post->id }}",
-                comment_body: content,
-                "_token":  "{{ csrf_token() }}"
-             }
-        }).done(function (data) {
-            reloadCommentReply();
-        }).fail(function (jqXHR, ajaxOptions, thrownError) {
-            alert('No response from server');
-        });
+        if (content) {
+            $.ajax({
+                url: '/comments',
+                type: "POST",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data: {
+                    post_id: "{{ $post->id }}",
+                    comment_body: content,
+                    "_token": "{{ csrf_token() }}"
+                }
+            }).done(function (data) {
+                reloadCommentReply();
+            }).error(function (jqXHR, ajaxOptions, thrownError) {
+                if (jqXHR.status == 401) {
+                    return alert('Đăng nhập tài khoản để bình luận');
+                }
+                if (jqXHR.status == 403) {
+                    return document.location.href = '/email/verify';
+                }
+                return alert('No response from server');
+            });
+        }
     });
 
     function reloadCommentReply() {
