@@ -2523,6 +2523,49 @@ h2.title {
     width: 100%;
     height: 350px;
 }
+
+@media (min-width:320px)  {
+    .swiper-container {
+        width: 100%;
+        height: 150px;
+    }
+}
+/*@media (min-width:481px)  {*/
+/*    !* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. *!*/
+/*    .swiper-container {*/
+/*        width: 100%;*/
+/*        height: 150px;*/
+/*    }*/
+/*}*/
+@media (min-width:641px)  {
+    /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+    .swiper-container {
+        width: 100%;
+        height: 250px;
+    }
+}
+/*@media (min-width:961px)  {*/
+/*    !* tablet, landscape iPad, lo-res laptops ands desktops *!*/
+/*    .swiper-container {*/
+/*        width: 100%;*/
+/*        height: 250px;*/
+/*    }*/
+/*}*/
+@media (min-width:1025px) {
+    /* big landscape tablets, laptops, and desktops */
+    .swiper-container {
+        width: 100%;
+        height: 350px;
+    }
+}
+/*@media (min-width:1281px) {*/
+/*    !* hi-res laptops and desktops *!*/
+/*    .swiper-container {*/
+/*        width: 100%;*/
+/*        height: 350px;*/
+/*    }*/
+/*}*/
+
 .swiper-slide {
     text-align: center;
     font-size: 18px;
@@ -2572,9 +2615,9 @@ h2.title {
 }
 
 .index-slide1 {
-    background-image: url("/images/home/slider1.jpg")
+    background-image: url("/images/home/slider1.jpg");
 }
 
 .index-slide2 {
-    background-image: url("/images/home/slider2.jpg")
+    background-image: url("/images/home/slider2.jpg");
 }
