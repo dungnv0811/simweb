@@ -11,10 +11,10 @@
                 <!-- Slider main container -->
                 <div class="swiper-container main-slider" id="myCarousel">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide slider-bg-position index-slide1" data-hash="slide1">
+                        <div class="swiper-slide slider-bg-position index-slide1" data-hash="slide1" onclick="location.href='https://www.facebook.com/KyGoi-105141441394776';">
 <!--                            <h2>It is health that is real wealth and not pieces of gold and silver</h2>-->
                         </div>
-                        <div class="swiper-slide slider-bg-position index-slide2" data-hash="slide2">
+                        <div class="swiper-slide slider-bg-position index-slide2" data-hash="slide2" onclick="location.href='https://www.facebook.com/KyGoi-105141441394776';">
 <!--                            <h2>Happiness is nothing more than good health and a bad memory</h2>-->
                         </div>
                     </div>
