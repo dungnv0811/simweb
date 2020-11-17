@@ -21,7 +21,7 @@ class CreatePostsTable extends Migration
             $table->string('title', 100);
             $table->string('ward_code');
             $table->foreign('ward_code')->references('code')->on('wards')->onDelete('cascade');
-            $table->unsignedInteger('branch_id', 100);
+            $table->string('branch', 100);
             $table->string('model', 100)->nullable();
             $table->float('price', 16, 2);
             $table->string('images');

@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('css')
+<link href="{{ asset('css/light-gallery.css') }}" rel="stylesheet">
+@endsection
 
 @section('content')
 <div class="container">
@@ -18,29 +21,18 @@
                         @endif
                     </div>
                     @if(!empty(json_decode($post->images, true)))
-                    <div id="similar-product" class="carousel slide" data-ride="carousel">
-
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner">
-                            @foreach (array_chunk(json_decode($post->images, true), 3) as $three)
-                            <div class="item @if ($loop->first) active @endif">
-                                @foreach($three as $image)
-                                <a href=""><img src="{{url('/uploads/images/product/'.$image)}}" alt=""></a>
-                                @endforeach
-                            </div>
+                    <div class="demo-gallery">
+                        <ul id="lightgallery" class="list-unstyled row">
+                            @foreach(json_decode($post->images, true) as $image)
+                            <li class="col-xs-6 col-sm-4 col-md-2 col-lg-2" data-responsive="{{url('/uploads/images/product/'.$image)}}" data-src="{{url('/uploads/images/product/'.$image)}}">
+                                <a href="">
+                                    <img class="img-responsive" src="{{url('/uploads/images/product/'.$image)}}">
+                                </a>
+                            </li>
                             @endforeach
-                        </div>
-
-                        <!-- Controls -->
-                        <a class="left item-control" href="#similar-product" data-slide="prev">
-                            <i class="fa fa-angle-left"></i>
-                        </a>
-                        <a class="right item-control" href="#similar-product" data-slide="next">
-                            <i class="fa fa-angle-right"></i>
-                        </a>
+                        </ul>
                     </div>
                     @endif
-
                 </div>
                 <div class="col-sm-7">
                     <div class="product-information"><!--/product-information-->
@@ -55,7 +47,6 @@
                         <p><b>Hãng:</b> {{ $post->branch }}</p>
                         <p><b>Đời máy:</b> {{ $post->model }}</p>
                         <p><b>Tình trạng:</b> {{ $post->state_label }}</p>
-                        <a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
                     </div><!--/product-information-->
                 </div>
             </div><!--/product-details-->
@@ -113,8 +104,13 @@
 
     {!! JsValidator::formRequest('App\Http\Requests\PostCommentRequest') !!}
 
+    <script src="{{ asset('js/light-gallery.js') }}"></script>
     <script type="text/javascript">
     var _token = $('input[name="_token"]').val();
+
+    $(document).ready(function(){
+        $('#lightgallery').lightGallery();
+    });
 
     $(document).on('click', '.approve', function(){
         var button = $(this)
