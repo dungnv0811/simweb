@@ -87,9 +87,13 @@
 
                         <div class="form-group">
                             <label for="branch" class="col-md-4 control-label">Hãng *</label>
-
-                            <div class="col-md-6">
-                                <input id="branch" type="text" class="form-control" name="branch">
+                                <div class="col-md-6">
+                                    <select class="form-control" name="branch">
+                                        <option value="">Hãng</option>
+                                    @foreach ($branches as $branch)
+                                            <option value="{{$branch}}">{{$branch}}</option>
+                                        @endforeach
+                                    </select>
                             </div>
                         </div>
 

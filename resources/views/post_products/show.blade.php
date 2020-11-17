@@ -64,8 +64,8 @@
                             {{ $post->description }}
                         </p>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Người bán:</li>
-                            <li class="list-group-item">Liên lạc:</li>
+                            <li class="list-group-item">Người bán: {{ $post->username }}</li>
+                            <li class="list-group-item">Liên lạc: {{ $post->phone_number }}</li>
                             <li class="list-group-item">Địa chỉ: {{ $post->path_with_type }}</li>
                         </ul>
                         Bài đăng được tạo: {{ Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
@@ -81,8 +81,6 @@
                             <p>{{ $post->description }}</p>
 
                             @include('partials.commentReply', ['comments' => $post->comments, 'post_id' => $post->id])
-{{--                            <form method="post" action="javascript:void(0)" id="post-show-comment-form">--}}
-{{--                                @csrf--}}
                                 <div class="form-group" id="post-show-comment-form">
                                     <input type="text" name="comment_body" class="form-control" />
                                     <input type="hidden" name="post_id" value="{{ $post->id }}" />
@@ -90,7 +88,6 @@
                                 <div class="form-group">
                                     <input type="submit" class="btn btn-warning btn-comment" value="Thêm bình luận" />
                                 </div>
-{{--                            </form>--}}
                         </div>
                     </div>
 

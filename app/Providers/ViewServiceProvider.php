@@ -4,6 +4,7 @@
 namespace App\Providers;
 
 
+use App\View\Composers\BranchComposer;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
@@ -27,9 +28,8 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Using class based composers...
         View::composer(
-            'profile', 'App\Http\View\Composers\ProfileComposer'
+            ['post_products.create', ], BranchComposer::class
         );
     }
 

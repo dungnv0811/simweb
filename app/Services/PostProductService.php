@@ -27,7 +27,7 @@ class PostProductService
         $param['price'] = filter_var($param['price'], FILTER_SANITIZE_NUMBER_INT);
         $param['slug'] = $param['title'] . '-' . time();
         $param['user_id'] = Auth::id();
-        $param['short_description'] = substr($param['title'], 128);
+        $param['short_description'] = substr($param['description'], 0, 160);
         return $param;
     }
 
@@ -49,6 +49,8 @@ class PostProductService
             'posts.*',
             'wards.path_with_type',
             'users.name AS username',
+            'users.phone AS phone_number',
+
         ];
         $condition = [
             'posts.slug' => $slug
