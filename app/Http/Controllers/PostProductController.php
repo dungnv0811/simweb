@@ -118,7 +118,6 @@ class PostProductController extends Controller
      */
     public function destroy(Request $request)
     {
-
         $post = PostProduct::findOrFail($request->post_id);
         $post->delete();
 

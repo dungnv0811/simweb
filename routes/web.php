@@ -54,9 +54,9 @@ Route::get('/login/{provider}/callback', 'Auth\LoginController@handleProviderCal
  * Authentication group.
  */
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::resource('/comments', 'PostCommentController')->only(['store', 'index']);
+    Route::resource('/comments', 'PostCommentController')->only(['store', 'index', 'show']);
     Route::resource('users', 'UserController');
-    Route::resource('posts', 'PostProductController')->only(['create', 'store', 'delete']);
+    Route::resource('posts', 'PostProductController')->only(['create', 'store', 'delete', 'show']);
 
 
 
@@ -70,7 +70,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         });
         Route::get('/admin/index','AdminController@index')->name('admin.index');
         Route::post('/admin/approvePost', 'PostProductController@approvedProduct')->name('admin.approvePost');
-        Route::post('/posts/delete', 'PostProductController@delete')->name('posts.delete');
         Route::post('/admin/posts', 'PostProductController@update')->name('posts.update');
 
     });
@@ -89,10 +88,13 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::group(['middleware' => ['can:isAdmin,isAuthor,isUser', 'verified']], function () {
         Route::put('/user/updateUser', 'UserController@update')->name('user.updateUser');
     });
+
+    Route::post('/posts/delete', 'PostProductController@delete')->name('posts.delete');
+
 });
 
 
-Route::resource('posts', 'PostProductController')->only(['index', 'show']);
+Route::resource('posts', 'PostProductController')->only(['index', 'show',]);
 
 
 
