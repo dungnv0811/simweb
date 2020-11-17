@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="profile-img">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" style="" alt=""/>
+                        <img src="{{url('/images/home/default.png')}}" style="" alt=""/>
                         <div class="file btn btn-lg btn-primary">
                             Đổi avatar
                             <input type="file" name="file"/>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
-<link href="{{ asset('css/swipper.css') }}" rel="stylesheet">
 @section('css')
+<link href="{{ asset('css/swipper.css') }}" rel="stylesheet">
 @endsection
 
 @section('slider')
