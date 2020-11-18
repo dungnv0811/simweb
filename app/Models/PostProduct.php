@@ -31,10 +31,6 @@ class PostProduct extends Model
         'is_recommended'
     ];
 
-    protected $casts = [
-        'price' => MoneyFormatCast::class
-    ];
-
     const NEW = 0;
     const SECONDHAND = 1;
 
@@ -101,6 +97,11 @@ class PostProduct extends Model
     public function getStateLabelAttribute()
     {
         return trans("post.status.$this->state");
+    }
+
+    public function getPriceUnitAttribute()
+    {
+        return number_format($this->attributes['price'] / MoneyFormatCast::UNIT_PRICE);
     }
 
 }

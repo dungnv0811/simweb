@@ -12,8 +12,8 @@
                     <label for="isRecommended" class="col-md-4 control-label">Bài đăng nổi bật</label>
 
                     <div class="col-md-6">
-                        <label class="radio-inline"><input type="radio" id="unrecommended" name="isRecommended" value="0" checked>Bình thường</label>
-                        <label class="radio-inline"><input type="radio" id="isRecommended" name="isRecommended" value="1">Nổi bật</label>
+                        <label class="radio-inline"><input type="radio" id="unrecommended" name="is_recommended" value="0" checked>Bình thường</label>
+                        <label class="radio-inline"><input type="radio" id="isRecommended" name="is_recommended" value="1">Nổi bật</label>
                         @if ($errors->has('isRecommended'))
                         <span class="help-block">
                             <strong>{{ $errors->first('isRecommended') }}</strong>
