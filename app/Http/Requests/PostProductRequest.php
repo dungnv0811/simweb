@@ -33,7 +33,7 @@ class PostProductRequest extends FormRequest
             'state' => ['required'],
             'branch' => ['required'],
             'price' => ['required', 'max:16'],
-            'images.*' => ['required'],
+            'images.*' => ['required', 'max:5120'],
         ];
     }
 
@@ -52,4 +52,14 @@ class PostProductRequest extends FormRequest
            'images.*' => 'ảnh',
        ];
     }
+
+    public function messages()
+    {
+        return [
+            'images.*.max' => 'Truờng ảnh không thể lớn hơn 5MB'
+        ];
+    }
+
+
+
 }

@@ -39,7 +39,7 @@
                         <h2>{{ $post->title }}</h2>
                         <p>Thông tin: {{ $post->short_description }}</p>
                         <span>
-                            <span>{{ $post->price }}K VNĐ</span>
+                            <span>{{ $post->price_unit }}K VNĐ</span>
 <!--                            @can('isAdmin')-->
 <!--                            <button type="button" class="btn {{ ($post->status == 'published') ? 'btn-info' : 'btn-danger' }} btn-xs approve" value="{{ $post->id }}" id="post-show-approve-{{ $post->id }}"><i class="fa fa-lock"></i> {{ ($post->status == 'published') ? 'duyệt bài' : 'đóng bài' }}</button>-->
 <!--                            @endcan-->

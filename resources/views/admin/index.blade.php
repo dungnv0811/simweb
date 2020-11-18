@@ -122,7 +122,7 @@
         var page = $('.page-item.active').text();
         var data = {
             id: $("[name=hidden-post-id]").val(),
-            isRecommended: $("#isRecommended").val(),
+            is_recommended: $("[name=is_recommended]:checked:enabled").val(),
             title: $("#title").val(),
             description: $("#description").val(),
             state: $("#state").val(),

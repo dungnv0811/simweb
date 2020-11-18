@@ -13,10 +13,10 @@
                                 @if(empty(json_decode($recommendedPost->images, true)))
                                 <img src="{{url('/uploads/images/product/default.jpg')}}" alt="" />
                                 @else
-                                <img src="{{url('/uploads/images/product/'.json_decode($recommendedPost->images, true)[0])}}" alt="" />
+                                <img src="{{url('/uploads/images/product/'.json_decode($recommendedPost->images, true)[0])}}" alt="" style="width: 255px; height: 255px"  />
                                 @endif
 
-                                <h2>{{ $recommendedPost->price }}K VNĐ</h2>
+                                <h2>{{ $recommendedPost->price_unit }}K VNĐ</h2>
                                 <p>{{ $recommendedPost->title }}</p>
                                 <p><i class="fa fa-clock-o"></i> {{ Carbon\Carbon::parse($recommendedPost->created_at)->diffForHumans()}}</p>
                                 <a href="{{ route('posts.show', $recommendedPost->slug) }}" class="btn btn-info"><i class="fa fa-info-circle"></i> Chi tiết</a>
@@ -46,11 +46,11 @@
                 <div class="single-products">
                     <div class="productinfo text-center">
                         @if(empty(json_decode($post->images, true)))
-                        <img src="{{url('/uploads/images/product/default.jpg')}}" alt="" />
+                        <img src="{{url('/uploads/images/product/default.jpg')}}" alt="" style="width: 255px; height: 255px" />
                         @else
-                        <img src="{{url('/uploads/images/product/'.json_decode($post->images, true)[0])}}" alt="" />
+                        <img src="{{url('/uploads/images/product/'.json_decode($post->images, true)[0])}}" alt="" style="width: 255px; height: 255px" />
                         @endif
-                        <h2>{{ $post->price }}K VNĐ</h2>
+                        <h2>{{ $post->price_unit }}K VNĐ</h2>
                         <p>{{ $post->title }}</p>
                         <a href="{{ route('posts.show', $post->slug) }}" class="btn btn-default add-to-cart"><i class="fa fa-info-circle"></i>Chi tiết</a>
                     </div>

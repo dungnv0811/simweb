@@ -22,7 +22,7 @@
                     </div>
                 </div>
 
-                <div class="form-group{{ $errors->has('isRecommended') ? ' has-error' : '' }}">
+                <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
                     <label for="isRecommended" class="col-md-4 control-label">Giới tính</label>
 
                     <div class="col-md-6">

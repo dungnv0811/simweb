@@ -27,9 +27,11 @@ trait Image
                 $filename = time() . '-' .  uniqid() .  '.' . $ext;
                 $resizeImage = InterventionImage::make($image);
                 //Resize image.
-                $resizeImage->fit(499, 499, function($constraint){
-                    $constraint->aspectRatio();
-                })->save(public_path('uploads/images' . DIRECTORY_SEPARATOR  . $folder  . DIRECTORY_SEPARATOR . $filename));
+                $resizeImage
+       /*             ->resize(null, null, function($constraint){
+                        $constraint->aspectRatio();
+                    })*/
+                    ->save(public_path('uploads/images' . DIRECTORY_SEPARATOR  . $folder  . DIRECTORY_SEPARATOR . $filename));
                 $names[$key] = $filename;
             }
         } catch (\Exception $e) {
