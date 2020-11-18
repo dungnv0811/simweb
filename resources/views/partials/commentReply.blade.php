@@ -5,7 +5,7 @@
         <li class="media col-md-12">
 
             <a class="pull-left" href="#">
-                <img class="media-object" src="{{url('/images/home/default-avatar.png')}}" alt="" width="64px" height="64px">
+                <img class="media-object" src="{{url('/images/home/default-avatar.png')}}" width="64px">
             </a>
             <div class="media-body">
                 <ul class="sinlge-post-meta">

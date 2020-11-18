@@ -1321,7 +1321,6 @@ h2.title {
   display: block;
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
-  padding-right: 15px;
 }
 
 #reviews ul li a i{
@@ -2290,11 +2289,11 @@ h2.title {
 
 .response-area .media img{
   height: 102px;
-  width: 100%;
+  width: 60%;
 }
 
 .response-area .media .pull-left {
-  margin-right: 25px
+  margin-left: 25px
 }
 
 .response-area .second-media {
