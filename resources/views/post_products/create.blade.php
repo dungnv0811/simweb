@@ -6,14 +6,6 @@
         <div class="col-sm-3">
             @include('partials.sidebarAds')
         </div>
-{{--       {{ dd($errors) }}--}}
-    @foreach($errors as $e)
-            dd($errors)
-
-            dump($e)
-
-        @endforeach
-
         <div class="col-sm-9 padding-right">
             <div class="row">
                 <div class="col-sm-12">
