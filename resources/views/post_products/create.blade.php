@@ -143,11 +143,13 @@
     {!! JsValidator::formRequest('App\Http\Requests\PostProductRequest', "#create-product") !!}
 <script type="text/javascript">
     $(document).ready(function () {
-        var size = 0;
+        var size;
         $("#posts-create-id").on('change', function () {
+            size = 0;
             for (let i=0; i < this.files.length; i++){
                 size += this.files[i].size;
             }
+            console.log(size);
         });
         $("#posts-create-id").rules('add', {
             max: {
