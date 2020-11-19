@@ -10,7 +10,7 @@
     @foreach ($posts as $post)
     <tr>
         <td>
-            <a href="{{ route('posts.show', $post->slug) }}" class=""><i class="fa fa-shopping-cart"></i>{{ $post->slug }}</a>
+            <a href="{{ route('posts.show', $post->slug) }}" class=""><i class="fa fa-info-circle"></i> {{ $post->slug }}</a>
         </td>
         <td>
             {{ Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
