@@ -24,9 +24,10 @@ class PostProductService
 
     private function handleParam(array $param): array
     {
+        $userId = Auth::id();
         $param['price'] = filter_var($param['price'], FILTER_SANITIZE_NUMBER_INT);
-        $param['slug'] = $param['title'] . '-' . time();
-        $param['user_id'] = Auth::id();
+        $param['slug'] = $userId . '-' . time();
+        $param['user_id'] = $userId;
         $param['short_description'] = substr($param['description'], 0, 160);
         return $param;
     }
@@ -139,6 +140,14 @@ class PostProductService
         }
         return true;
 
+    }
+
+
+    public function deleteProduct(Request $request)
+    {
+        $post = $this->product->findOrFail($request->get('id'));
+        $this->deleteImage($post->images);
+        $post->delete();
     }
 
 }

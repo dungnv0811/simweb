@@ -6,6 +6,13 @@
         <div class="col-sm-3">
             @include('partials.sidebarAds')
         </div>
+{{--       {{ dd($errors) }}--}}
+    @foreach($errors as $e)
+            dd($errors)
+
+            dump($e)
+
+        @endforeach
 
         <div class="col-sm-9 padding-right">
             <div class="row">
@@ -15,7 +22,7 @@
             </div>
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
+                    <form class="form-horizontal" method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data" id="create-product">
                         @csrf
                         <div class="form-group">
                             <label for="city" class="col-md-4 control-label">Thành Phố *</label>
@@ -141,8 +148,33 @@
 
 
 @push('javascript')
-    {!! JsValidator::formRequest('App\Http\Requests\PostProductRequest') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\PostProductRequest', "#create-product") !!}
 <script type="text/javascript">
+    $(document).ready(function () {
+        var size = 0;
+        $("#posts-create-id").on('change', function () {
+            for (let i=0; i < this.files.length; i++){
+                size += this.files[i].size;
+            }
+        });
+        $("#posts-create-id").rules('add', {
+            max: {
+                depends: function () {
+                    if (size >= 5242880) {
+                        return  true;
+                    }
+;                    return false;
+                }
+            },
+            messages: {
+                max: "Truờng ảnh không thể lớn hơn 5MB",
+            }
+        });
+    });
+
+
+
+
     $(document).ready(function() {
         document.getElementById('posts-create-id').addEventListener('change', readImage, false);
 
