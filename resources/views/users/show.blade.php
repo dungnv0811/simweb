@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="profile-img">
-                        <img src="{{url('/images/home/default.png')}}" style="" alt=""/>
+                        <img src="{{url('/images/home/default-avatar.png')}}" style="" alt=""/>
                         <div class="file btn btn-lg btn-primary">
                             Đổi avatar
                             <input type="file" name="file"/>
