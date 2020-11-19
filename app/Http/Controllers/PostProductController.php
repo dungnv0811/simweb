@@ -118,8 +118,7 @@ class PostProductController extends Controller
      */
     public function destroy(Request $request)
     {
-        $post = PostProduct::findOrFail($request->post_id);
-        $post->delete();
+        $this->postProductService->deleteProduct($request);
 
         return back();
     }
@@ -132,9 +131,7 @@ class PostProductController extends Controller
      */
     public function delete(Request $request)
     {
-        $post = PostProduct::findOrFail($request->id);
-        $post->delete();
-
+        $this->postProductService->deleteProduct($request);
         return "deleted successfully";
     }
 
