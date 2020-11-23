@@ -13,7 +13,7 @@
                                 @if(empty(json_decode($recommendedPost->images, true)))
                                 <img src="{{url('/uploads/images/product/default.jpg')}}" alt="" />
                                 @else
-                                <img src="{{url('/uploads/images/product/'.json_decode($recommendedPost->images, true)[0])}}" alt="" style="width: 255px; height: 255px"  />
+                                <img src="{{url('/uploads/images/product/'.json_decode($recommendedPost->images, true)[0])}}" alt="" style="width: 255px; height: 453px"  />
                                 @endif
 
                                 <h2>{{ $recommendedPost->price_unit }}K VNĐ</h2>
@@ -46,9 +46,9 @@
                 <div class="single-products">
                     <div class="productinfo text-center">
                         @if(empty(json_decode($post->images, true)))
-                        <img src="{{url('/uploads/images/product/default.jpg')}}" alt="" style="width: 255px; height: 255px" />
+                        <img src="{{url('/uploads/images/product/default.jpg')}}" alt="" style="width: 255px; height: 453px" />
                         @else
-                        <img src="{{url('/uploads/images/product/'.json_decode($post->images, true)[0])}}" alt="" style="width: 255px; height: 255px" />
+                        <img src="{{url('/uploads/images/product/'.json_decode($post->images, true)[0])}}" alt="" style="width: 255px; height: 453px" />
                         @endif
                         <h2>{{ $post->price_unit }}K VNĐ</h2>
                         <p>{{ $post->title }}</p>
