@@ -154,7 +154,7 @@
         $("#posts-create-id").rules('add', {
             max: {
                 depends: function () {
-                    if (size >= 8388608) {
+                    if (size >= 20971520) {
                         return  true;
                     }
 ;                    return false;
