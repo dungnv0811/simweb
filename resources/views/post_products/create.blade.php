@@ -154,14 +154,14 @@
         $("#posts-create-id").rules('add', {
             max: {
                 depends: function () {
-                    if (size >= 3145728) {
+                    if (size >= 8388608) {
                         return  true;
                     }
 ;                    return false;
                 }
             },
             messages: {
-                max: "Truờng ảnh không thể lớn hơn 3MB",
+                max: "Truờng ảnh không thể lớn hơn 8MB",
             }
         });
     });
