@@ -161,7 +161,7 @@
                 }
             },
             messages: {
-                max: "Truờng ảnh không thể lớn hơn 8MB",
+                max: "Truờng ảnh không thể lớn hơn 20MB",
             }
         });
     });
