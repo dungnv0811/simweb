@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
+        <meta name="google-site-verification" content="RACeemuYsVKKH_CV7O-MsjbI9kCO7H0IhJx-sZoIMz0" />
         <title>Trang chủ | Web mua bán điện thoại</title>
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
