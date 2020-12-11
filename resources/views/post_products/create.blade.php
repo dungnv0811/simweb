@@ -59,7 +59,7 @@
                         <div class="form-group">
                             <label for="title" class="col-md-4 control-label">Tiêu đề *</label>
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control" name="title" value="" required autofocus>
+                                <input id="title" type="text" class="form-control" name="title" value="" placeholder="Đây là tiêu đề của bài đăng, sẽ được hiển thị ở mục tiêu đề" required autofocus>
                             </div>
                         </div>
 
